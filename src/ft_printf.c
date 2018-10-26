@@ -43,14 +43,10 @@ size_t		parse(va_list list, char type, t_buffer *buffer)
 		ret = ft_savechar(buffer, (char)va_arg(list, int), 1);
 	else if (type == 'd' || type == 'i')
 		ret = getint(list, buffer);
-	else if (type == 'x')
-		ret = usenbr(buffer, type, va_arg(list, unsigned int), 16);
 	else if (type == 'p')
 		ret = usenbr(buffer, type, va_arg(list, unsigned long long), 16);
-	else if (type == 'o')
-		ret = usenbr(buffer, type, va_arg(list, unsigned int), 8);
-	else if (type == 'u')
-		ret = usenbr(buffer, type, va_arg(list, unsigned int), 10);
+	else
+		return (parse_u(list, type, buffer));
 	return (ret);
 }
 

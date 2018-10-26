@@ -37,4 +37,6 @@ int			ischar(char c);
 int			ft_savechar(t_buffer *buffer, char s, int repeat);
 int			ft_savestr(t_buffer *buffer, char *s);
 void		initbuffer(t_buffer *buffer);
+int     	parse_u(va_list list, char type, t_buffer *buffer);
+
 #endif
