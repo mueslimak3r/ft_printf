@@ -29,8 +29,6 @@ size_t		parse(va_list list, char type, t_buffer *buffer);
 int			ft_printf(const char *format, ...);
 int			print_addr(char *addr);
 char		*uitoa_base(unsigned long long nbr, int base);
-int			len_putstr(char *s);
-int			len_putchar(char c);
 int			isflag(char c);
 size_t		usenbr(t_buffer *buffer, char type, unsigned long long nbr, int base);
 int			ischar(char c);

@@ -29,25 +29,6 @@ int			isflag(char c)
 	return (0);
 }
 
-int			len_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int			len_putstr(char *s)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (len_putstr("(null)"));
-	while (s[i] != '\0')
-		i++;
-	write(1, s, i);
-	return (i);
-}
-
 size_t		usenbr(t_buffer *buffer, char type, unsigned long long nbr, int base)
 {
 	size_t	ret;
