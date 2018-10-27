@@ -25,6 +25,16 @@ typedef struct				s_buffer
 	int						buf_usedchars;
 }							t_buffer;
 
+typedef struct				s_flags
+{
+	int 					f_long;
+	int						f_llong;
+	int						f_ulong;
+	int						u_llong;
+	int						chr;
+	int						shrt;
+}							t_flags;
+
 size_t		parse(va_list list, char type, t_buffer *buffer);
 int			ft_printf(const char *format, ...);
 int			print_addr(char *addr);

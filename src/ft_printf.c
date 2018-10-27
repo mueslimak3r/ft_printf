@@ -50,8 +50,9 @@ size_t		parse(va_list list, char type, t_buffer *buffer)
 	return (ret);
 }
 
-int			findnext(const char *format, int pos)
+int			findnext(const char *format, int pos, t_flags *flags)
 {
+	getflags(format, pos, flags);
 	while (format[pos])
 	{
 		if (ischar(format[pos]))
@@ -69,7 +70,9 @@ int				ft_printf(const char *format, ...)
 	size_t		ret;
 	int			i;
 	t_buffer	buffer;
+	t_flags		*flags;
 
+	flags = NULL;
 	i = 0;
 	ret = 0;
 	va_start(list, format);
@@ -78,11 +81,12 @@ int				ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			i = findnext(format, ++i);
+			i = findnext(format, ++i, flags);
 			if (!format[i])
 				return (ret);
 			if ((isflag(format[i]) == 1) || format[i] == '%')
 				ret += parse(list, format[i], &buffer);
+			free(flags);
 		}
 		else
 			ret += ft_savechar(&buffer, format[i], 1);
