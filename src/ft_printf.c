@@ -67,13 +67,14 @@ int				ft_printf(const char *format, ...)
 {
 	va_list 	list;
 	size_t		ret;
-	int			i;
+	size_t		i;
 	t_buffer	buffer;
+	t_flags		flags;
 
-	i = 0;
 	ret = 0;
 	va_start(list, format);
 	initbuffer(&buffer);
+	i = checkflags(format, &flags);
 	while (format[i])
 	{
 		if (format[i] == '%')
