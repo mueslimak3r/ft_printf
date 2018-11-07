@@ -13,7 +13,7 @@
 NAME = libftprintf.a
 
 SRC = ft_printf.c parse.c uitoa_base.c print_buffer.c \
-parse_u.c flags.c
+parse_u.c flags.c parse_chars.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -48,7 +48,7 @@ fclean: clean
 re: fclean all
 
 compile: re clean
-	@$(CC) $(FLAGS) $(INC) main.c $(NAME)
+	@$(CC) $(FLAGS) $(INC) mymain.c $(NAME)
 	@make clean
 
 cleanup: fclean

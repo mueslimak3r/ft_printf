@@ -24,7 +24,7 @@ int			ischar(char c)
 int			isflag(char c)
 {
 	if (c == 's' || c == 'c' || c == 'd' || c == 'i' ||
-			c == 'p' || c == 'o' || c == 'u' || c == 'x')
+			c == 'p' || c == 'o' || c == 'u' || c == 'x' || c == '%')
 		return (1);
 	return (0);
 }
@@ -39,8 +39,8 @@ size_t		usenbr(t_buffer *buffer, char type, unsigned long long nbr, int base)
 	if (str)
 	{
 		if (type == 'p')
-			ret += ft_savestr(buffer, "0x");
-		ret += ft_savestr(buffer, str);
+			ret += ft_savestr(buffer, "0x", -1);
+		ret += ft_savestr(buffer, str, -1);
 		free(str);
 	}
 	return (ret);

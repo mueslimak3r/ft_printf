@@ -54,16 +54,18 @@ int		ft_savechar(t_buffer *buffer, char s, int repeat)
 	return (ret);
 }
 
-int		ft_savestr(t_buffer *buffer, char *s)
+int		ft_savestr(t_buffer *buffer, char *s, int size)
 {
 	int		pos;
 	int		i;
 
 	i = 0;
 	if (!s)
-		return (ft_savestr(buffer, "(null)"));
-	pos = checkbuffer(buffer, (int)ft_strlen(s));
-	while (s[i] != '\0')
+		return (ft_savestr(buffer, "(null)", -1));
+	if (size == -1)
+		size = (int)ft_strlen(s);
+	pos = checkbuffer(buffer, size);
+	while (s[i] != '\0' && i < size)
 	{
 		buffer->chr[pos] = s[i];
 		i++;

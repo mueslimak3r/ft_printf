@@ -23,24 +23,24 @@ size_t		getint(va_list list, t_buffer *buffer)
 	{
 		ret += ft_savechar(buffer, '-', 1);
 		if (nbr == -2147483648)
-			return (ret + ft_savestr(buffer, "2147483648"));
+			return (ret + ft_savestr(buffer, "2147483648", -1));
 		nbr = -nbr;
 	}
 	ret += usenbr(buffer, 'd', nbr, 10);
 	return (ret);
 }
 
-size_t		parse(va_list list, char type, t_buffer *buffer)
+size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags)
 {
 	size_t	ret;
 
 	ret = 0;
-	if (type == 's')
-		ret = ft_savestr(buffer, va_arg(list, char*));
-	else if (type == '%')
+	if (!flags)
+		return (0);
+	if (type == '%')
 		ret = ft_savechar(buffer, '%', 1);
-	else if (type == 'c')
-		ret = ft_savechar(buffer, (char)va_arg(list, int), 1);
+	else if (type == 's' || type == 'c')
+		ret = parse_chars(list, type, buffer, flags);
 	else if (type == 'd' || type == 'i')
 		ret = getint(list, buffer);
 	else if (type == 'p')
@@ -48,20 +48,6 @@ size_t		parse(va_list list, char type, t_buffer *buffer)
 	else
 		return (parse_u(list, type, buffer));
 	return (ret);
-}
-
-int			findnext(const char *format, int pos, t_flags *flags)
-{
-	getflags(format, pos, flags);
-	while (format[pos])
-	{
-		if (ischar(format[pos]))
-			return (pos);
-		else if (format[pos] == '%')
-			return (pos);
-		pos++;
-	}
-	return (pos);
 }
 
 int				ft_printf(const char *format, ...)
@@ -75,17 +61,16 @@ int				ft_printf(const char *format, ...)
 	ret = 0;
 	va_start(list, format);
 	initbuffer(&buffer);
-	i = checkflags(format, &flags);
+	i = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
-			i = findnext(format, ++i, flags);
+			i = checkflags(format, ++i, &flags);
 			if (!format[i])
 				return (ret);
-			if ((isflag(format[i]) == 1) || format[i] == '%')
-				ret += parse(list, format[i], &buffer);
-			free(flags);
+			if (isflag(format[i]) == 1)
+				ret += parse(list, format[i], &buffer, &flags);
 		}
 		else
 			ret += ft_savechar(&buffer, format[i], 1);
