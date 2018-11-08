@@ -42,8 +42,8 @@ typedef struct				s_flags
 	bool					minus;
 	bool					zero;
 	bool					limit_size;
-	size_t					max_size;
-	size_t					after_len;
+	int						max_size;
+	size_t					min_len;
 	size_t					before_len;
 }							t_flags;
 
