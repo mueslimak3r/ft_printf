@@ -43,8 +43,7 @@ typedef struct				s_flags
 	bool					zero;
 	bool					limit_size;
 	int						max_size;
-	size_t					min_len;
-	size_t					before_len;
+	int						min_len;
 }							t_flags;
 
 size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags);
@@ -58,7 +57,7 @@ int			ft_savechar(t_buffer *buffer, char s, int repeat);
 int			ft_savestr(t_buffer *buffer, char *s, int size);
 void		initbuffer(t_buffer *buffer);
 int     	parse_u(va_list list, char type, t_buffer *buffer);
-size_t		parse_chars(va_list list, char type, t_buffer *buffer, t_flags *flags);
 size_t		checkflags(const char *format, size_t pos, t_flags *flags);
+size_t      route_chars(va_list list, char type, t_buffer *buffer, t_flags *flags);
 
 #endif

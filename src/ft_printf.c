@@ -40,7 +40,7 @@ size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags)
 	if (type == '%')
 		ret = ft_savechar(buffer, '%', 1);
 	else if (type == 's' || type == 'c')
-		ret = parse_chars(list, type, buffer, flags);
+		ret = route_chars(list, type, buffer, flags);
 	else if (type == 'd' || type == 'i')
 		ret = getint(list, buffer);
 	else if (type == 'p')

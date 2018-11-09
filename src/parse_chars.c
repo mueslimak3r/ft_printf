@@ -5,32 +5,49 @@ size_t      justify_chars(t_buffer *buffer, t_flags *flags, int size)
     size_t  ret;
 
     ret = 0;
-    if (flags->min_len > size)
+    if (flags->min_len > size && flags->zero)
+        ret += ft_savechar(buffer, '0', flags->min_len - size);
+    else if (flags->min_len > size && !(flags->zero))
         ret += ft_savechar(buffer, ' ', flags->min_len - size);
     return (ret);
 }
 
-size_t      parse_chars(va_list list, char type, t_buffer *buffer, t_flags *flags)
+size_t      parse_chars(char *data, int size, char type, t_buffer *buffer, t_flags *flags)
 {
     size_t  ret;
-    char    *str;
-    char    c;
-    size_t  size;
 
-    c = 0;
     ret = 0;
+
     ret += !(flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
+    ret += (type == 's') ? ft_savestr(buffer, data, size) : (ft_savechar(buffer, *data, 1));
+    ret += (flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
+    return (ret);
+}
+
+size_t      route_chars(va_list list, char type, t_buffer *buffer, t_flags *flags)
+{
+    char    *str;
+    int     size;
+    char    c;
+
+    /*if (type == 's')
+    {
+        size = (flags->limit_size && flags->max_size < (int)ft_strlen(str))
+            ? flags->max_size : (int)ft_strlen(str);
+    }*/
+    //if (type == 'c' && (!(flags->limit_size) || (flags->max_size > 0)))
+        //return (parse_chars(&((char)va_arg(list, int)), 1, type, buffer, flags));
     if (type == 's')
     {
         str = va_arg(list, char*);
         size = (flags->limit_size && flags->max_size < (int)ft_strlen(str))
             ? flags->max_size : (int)ft_strlen(str);
-        ret += ft_savestr(buffer, str, size);
+        return (parse_chars(str, size, type, buffer, flags));
     }
     else if (type == 'c')
+    {
         c = (char)va_arg(list, int);
-    if (type == 'c' && (!(flags->limit_size) || flags->max_size > 0))
-        ret += ft_savechar(buffer, c, 1);
-    ret += !(flags->minus) ? 0 : (justify_chars(buffer, flags, size));
-    return (ret);
+        return (parse_chars(&c, 1, type, buffer, flags));
+    }
+    return (0);
 }

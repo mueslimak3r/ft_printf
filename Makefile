@@ -52,7 +52,6 @@ compile: re clean
 	@make clean
 
 cleanup: fclean
-	@rm -f a.out
-	@rm -rf a.out.dSYM
+	@rm -rf *.out*
 
 .PHONY : all, re, clean, fclean, leaks, cleanup

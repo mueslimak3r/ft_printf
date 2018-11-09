@@ -4,10 +4,10 @@ int     ft_printf(const char *format, ...);
 
 int     main(void)
 {
-    ft_printf("oct: %20s-end-\n", "hello world!");
-    ft_printf("oct: %-20s-end-\n", "hello world!");
+    ft_printf("str: %20s %s c: %c-end-\n", "hello world!", " string2", 'c');
+    ft_printf("str: %-20s %s c: %c-end-\n", "hello world!", " string2", 'c');
 
-    ft_printf("oct: %20.7s-end-\n", "hello world!");
-    ft_printf("oct: %-20.7s-end-\n", "hello world!");
+    ft_printf("str: %20.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
+    ft_printf("str: %-20.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
     return (0);
 }

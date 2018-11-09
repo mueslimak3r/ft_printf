@@ -14,7 +14,6 @@ void			initflags(t_flags *flags)
 	flags->plus = false;
 	flags->minus = false;
 	flags->min_len = false;
-	flags->before_len = false;
 	flags->limit_size = false;
 	flags->max_size = 0;
 }
