@@ -18,6 +18,7 @@
 # include <stdarg.h>
 # include <stdbool.h>
 # include <stdio.h>
+# include <stdint.h>
 # include "../libft/libft.h"
 
 typedef struct				s_buffer
@@ -29,7 +30,7 @@ typedef struct				s_buffer
 
 typedef struct				s_inbuf
 {
-	unsigned long long int	u;
+	unsigned int	u;
 	long long int			s;
 }							t_inbuf;
 
@@ -59,7 +60,7 @@ size_t		checkflags(const char *format, size_t pos, t_flags *flags);
 
 size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags);
 size_t      route_chars(va_list list, char type, t_buffer *buffer, t_flags *flags);
-size_t		usenbr(t_buffer *buffer, char type, unsigned long long nbr, int base);
+size_t		usenbr(t_flags *flags, t_buffer *buffer, char type, int base);
 size_t     	route_u(va_list list, char type, t_buffer *buffer, t_flags *flags);
 
 int			ft_savechar(t_buffer *buffer, char s, int repeat);

@@ -33,13 +33,6 @@ size_t      route_chars(va_list list, char type, t_buffer *buffer, t_flags *flag
     int     size;
     char    c;
 
-    /*if (type == 's')
-    {
-        size = (flags->limit_size && flags->max_size < (int)ft_strlen(str))
-            ? flags->max_size : (int)ft_strlen(str);
-    }*/
-    //if (type == 'c' && (!(flags->limit_size) || (flags->max_size > 0)))
-        //return (parse_chars(&((char)va_arg(list, int)), 1, type, buffer, flags));
     if (type == 's')
     {
         str = va_arg(list, char*);

@@ -16,6 +16,7 @@ size_t		getint(va_list list, t_buffer *buffer)
 {
 	size_t	ret;
 	int		nbr;
+	char	*str;
 
 	ret = 0;
 	nbr = va_arg(list, int);
@@ -26,7 +27,8 @@ size_t		getint(va_list list, t_buffer *buffer)
 			return (ret + ft_savestr(buffer, "2147483648", -1));
 		nbr = -nbr;
 	}
-	ret += usenbr(buffer, 'd', nbr, 10);
+	str = uitoa_base(nbr, 10);
+	ret += ft_savestr(buffer, str, (int)ft_strlen(str));
 	return (ret);
 }
 
@@ -44,7 +46,7 @@ size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags)
 	else if (type == 'd' || type == 'i')
 		ret = getint(list, buffer);
 	else if (type == 'p')
-		ret = usenbr(buffer, type, va_arg(list, unsigned long long), 16);
+		ret = route_u(list, type, buffer, flags);
 	else
 		ret = route_u(list, type, buffer, flags);
 	return (ret);
