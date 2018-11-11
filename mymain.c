@@ -10,6 +10,6 @@ int     main(void)
     ft_printf("str: %020.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
     ft_printf("str: %-20.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
 
-    ft_printf("oct: %+#hx\n", 16);
+    ft_printf("oct: %+#hX\n", 16);
     return (0);
 }

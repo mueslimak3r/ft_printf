@@ -13,7 +13,7 @@ size_t		usenbr(t_flags *flags, t_buffer *buffer, char type, int base)
     //    ? flags->max_size : (int)ft_strlen(str);
 	if (flags->plus == 1)
 		ret += ft_savechar(buffer, '+', 1);
-	if (type == 'p' || (type == 'x' && flags->pound == true))
+	if (type == 'p' || ((type == 'x' || type == 'X') && flags->pound == true))
 		ret += (ft_isupper(type)) ? ft_savestr(buffer, "0X", -1) : ft_savestr(buffer, "0x", -1);
 	ret += ft_savestr(buffer, str, -1);
 	free(str);
@@ -29,7 +29,7 @@ size_t				parse_u(char type, t_buffer *buffer, t_flags *flags)
 		ret = usenbr(flags, buffer, type, 8);
 	else if (type == 'u')
 		ret = usenbr(flags, buffer, type, 10);
-	else if (type == 'x' || type == 'p')
+	else if (type == 'x' || type == 'X' || type == 'p')
 		ret = usenbr(flags, buffer, type, 16);
 	return (ret);
 }

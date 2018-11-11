@@ -45,8 +45,6 @@ size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags)
 		ret = route_chars(list, type, buffer, flags);
 	else if (type == 'd' || type == 'i')
 		ret = getint(list, buffer);
-	else if (type == 'p')
-		ret = route_u(list, type, buffer, flags);
 	else
 		ret = route_u(list, type, buffer, flags);
 	return (ret);

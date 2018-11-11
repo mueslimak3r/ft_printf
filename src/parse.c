@@ -24,7 +24,8 @@ int			ischar(char c)
 int			isflag(char c)
 {
 	if (c == 's' || c == 'c' || c == 'd' || c == 'i' ||
-			c == 'p' || c == 'o' || c == 'u' || c == 'x' || c == '%')
+			c == 'p' || c == 'o' || c == 'u' || c == 'x' || c == '%' ||
+				c == 'X')
 		return (1);
 	return (0);
 }
