@@ -46,7 +46,7 @@ size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags)
 	else if (type == 'p')
 		ret = usenbr(buffer, type, va_arg(list, unsigned long long), 16);
 	else
-		return (parse_u(list, type, buffer));
+		ret = route_u(list, type, buffer, flags);
 	return (ret);
 }
 

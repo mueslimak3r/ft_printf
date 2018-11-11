@@ -28,20 +28,3 @@ int			isflag(char c)
 		return (1);
 	return (0);
 }
-
-size_t		usenbr(t_buffer *buffer, char type, unsigned long long nbr, int base)
-{
-	size_t	ret;
-	char	*str;
-
-	ret = 0;
-	str = uitoa_base(nbr, base);
-	if (str)
-	{
-		if (type == 'p')
-			ret += ft_savestr(buffer, "0x", -1);
-		ret += ft_savestr(buffer, str, -1);
-		free(str);
-	}
-	return (ret);
-}

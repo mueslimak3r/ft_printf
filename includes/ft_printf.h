@@ -27,16 +27,20 @@ typedef struct				s_buffer
 	int						buf_usedchars;
 }							t_buffer;
 
+typedef struct				s_inbuf
+{
+	unsigned long long int	u;
+	long long int			s;
+}							t_inbuf;
+
 typedef struct				s_flags
 {
 	bool					chr;
 	bool					shrt;
-	bool					integer;
-	bool					uinteger;
 	bool					longint;
 	bool					llong;
-	bool					ulong;
-	bool					ullong;
+	bool					j;
+	bool					z;
 	bool					pound;
 	bool					plus;
 	bool					minus;
@@ -44,20 +48,25 @@ typedef struct				s_flags
 	bool					limit_size;
 	int						max_size;
 	int						min_len;
+	t_inbuf					*inbuf;
 }							t_flags;
 
-size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags);
 int			ft_printf(const char *format, ...);
-int			print_addr(char *addr);
-char		*uitoa_base(unsigned long long nbr, int base);
-int			isflag(char c);
+
+void		initbuffer(t_buffer *buffer);
+void		initflags(t_flags *flags);
+size_t		checkflags(const char *format, size_t pos, t_flags *flags);
+
+size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags);
+size_t      route_chars(va_list list, char type, t_buffer *buffer, t_flags *flags);
 size_t		usenbr(t_buffer *buffer, char type, unsigned long long nbr, int base);
-int			ischar(char c);
+size_t     	route_u(va_list list, char type, t_buffer *buffer, t_flags *flags);
+
 int			ft_savechar(t_buffer *buffer, char s, int repeat);
 int			ft_savestr(t_buffer *buffer, char *s, int size);
-void		initbuffer(t_buffer *buffer);
-int     	parse_u(va_list list, char type, t_buffer *buffer);
-size_t		checkflags(const char *format, size_t pos, t_flags *flags);
-size_t      route_chars(va_list list, char type, t_buffer *buffer, t_flags *flags);
+
+char		*uitoa_base(unsigned long long nbr, int base);
+int			ischar(char c);
+int			isflag(char c);
 
 #endif
