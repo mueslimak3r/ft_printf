@@ -30,8 +30,9 @@ typedef struct				s_buffer
 
 typedef struct				s_inbuf
 {
-	unsigned int	u;
+	unsigned long long		u;
 	long long int			s;
+	long double				f;
 }							t_inbuf;
 
 typedef struct				s_flags
@@ -40,10 +41,11 @@ typedef struct				s_flags
 	bool					shrt;
 	bool					longint;
 	bool					llong;
+	bool					L;
 	bool					j;
 	bool					z;
-	bool					pound;
-	bool					plus;
+	int						pound;
+	int						plus;
 	bool					minus;
 	bool					zero;
 	bool					limit_size;
@@ -62,11 +64,16 @@ size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags);
 size_t      route_chars(va_list list, char type, t_buffer *buffer, t_flags *flags);
 size_t		usenbr(t_flags *flags, t_buffer *buffer, char type, int base);
 size_t     	route_u(va_list list, char type, t_buffer *buffer, t_flags *flags);
+size_t      route_d(va_list list, t_buffer *buffer, t_flags *flags);
+size_t		route_f(va_list list, t_buffer *buffer, t_flags *flags);
 
 int			ft_savechar(t_buffer *buffer, char s, int repeat);
 int			ft_savestr(t_buffer *buffer, char *s, int size);
 
 char		*uitoa_base(unsigned long long nbr, int base);
+char		*ft_ftoa(float f, int size);
+
+size_t      justify_chars(t_buffer *buffer, t_flags *flags, int size);
 int			ischar(char c);
 int			isflag(char c);
 

@@ -4,18 +4,19 @@ size_t		usenbr(t_flags *flags, t_buffer *buffer, char type, int base)
 {
 	size_t	ret;
 	char	*str;
-	//int		size;
+	int		size;
 
 	ret = 0;
 	str = uitoa_base(flags->inbuf->u, base);
-	//size = (type == 'p') ? 2 : 0;
-    //size = (flags->limit_size && flags->max_size < (int)ft_strlen(str))
-    //    ? flags->max_size : (int)ft_strlen(str);
-	if (flags->plus == 1)
-		ret += ft_savechar(buffer, '+', 1);
-	if (type == 'p' || ((type == 'x' || type == 'X') && flags->pound == true))
+	size = (int)ft_strlen(str);
+	flags->inbuf->u = 0;
+	if (type == 'p' || ((type == 'x' || type == 'X') && flags->pound))
 		ret += (ft_isupper(type)) ? ft_savestr(buffer, "0X", -1) : ft_savestr(buffer, "0x", -1);
-	ret += ft_savestr(buffer, str, -1);
+	str = (ft_isupper(type)) ? ft_strcase(str, 'a') : str;
+	size += (type == 'p' || ((type == 'x' || type == 'X') && flags->pound)) ? 2 : 0;
+    ret += !(flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
+    ret += ft_savestr(buffer, str, -1);
+    ret += (flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
 	free(str);
 	return (ret);
 }
@@ -38,10 +39,10 @@ size_t				route_u(va_list list, char type, t_buffer *buffer, t_flags *flags)
 {
 	t_inbuf			buf;
 
-	if (flags->shrt == true || flags->chr == true)
+	if (type == 'p')
+		buf.u = va_arg(list, unsigned long long);
+	else if (flags->shrt == true || flags->chr == true)
 		buf.u = (unsigned long long)va_arg(list, int);
-	else if (type == 'p')
-		buf.u = (unsigned long long)va_arg(list, unsigned long);
 	else if (flags->longint == true)
 		buf.u = (unsigned long long)va_arg(list, unsigned long);
 	else if (flags->llong == true)
@@ -51,7 +52,8 @@ size_t				route_u(va_list list, char type, t_buffer *buffer, t_flags *flags)
 	else if (flags->z == true)
 		buf.u = (unsigned long long)va_arg(list, size_t);
 	else
-		buf.u = va_arg(list, unsigned int);
+		buf.u = (unsigned long)va_arg(list, unsigned long);
 	flags->inbuf = &buf;
 	return (parse_u(type, buffer, flags));
+	return (0);
 }

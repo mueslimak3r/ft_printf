@@ -83,5 +83,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_wordcnt(const char *t, char c);
 int					ft_isupper(char c);
+char*				ft_strcase(char *str, char format);
+char				*ft_itoa_base(long long value, int base);
 
 #endif

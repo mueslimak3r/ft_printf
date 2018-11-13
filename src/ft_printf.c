@@ -12,26 +12,6 @@
 
 #include "ft_printf.h"
 
-size_t		getint(va_list list, t_buffer *buffer)
-{
-	size_t	ret;
-	int		nbr;
-	char	*str;
-
-	ret = 0;
-	nbr = va_arg(list, int);
-	if (nbr < 0)
-	{
-		ret += ft_savechar(buffer, '-', 1);
-		if (nbr == -2147483648)
-			return (ret + ft_savestr(buffer, "2147483648", -1));
-		nbr = -nbr;
-	}
-	str = uitoa_base(nbr, 10);
-	ret += ft_savestr(buffer, str, (int)ft_strlen(str));
-	return (ret);
-}
-
 size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags)
 {
 	size_t	ret;
@@ -44,7 +24,9 @@ size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags)
 	else if (type == 's' || type == 'c')
 		ret = route_chars(list, type, buffer, flags);
 	else if (type == 'd' || type == 'i')
-		ret = getint(list, buffer);
+		ret = route_d(list, buffer, flags);
+	//else if (type == 'f')
+	//	ret = route_f(list, buffer, flags);
 	else
 		ret = route_u(list, type, buffer, flags);
 	return (ret);

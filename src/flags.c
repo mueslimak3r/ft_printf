@@ -6,10 +6,11 @@ void			initflags(t_flags *flags)
 	flags->shrt = false;
 	flags->longint = false;
 	flags->llong = false;
+	flags->L = false;
 	flags->j = false;
 	flags->z = false;
-	flags->pound = false;
-	flags->plus = false;
+	flags->pound = 0;
+	flags->plus = 0;
 	flags->minus = false;
 	flags->min_len = false;
 	flags->limit_size = false;
@@ -40,7 +41,7 @@ size_t			check_plusminus(size_t index, const char *format, t_flags *flags)
 		index = check_size(++index, format,flags);
 	else if (format[index] == '0' && !(ft_isdigit(format[index - 1])))
 	{
-		//flags->zero = true;
+		flags->zero = true;
 		index++;
 	}
 	while ((format[index] >= '0') && (format[index] <= '9'))
@@ -60,9 +61,11 @@ size_t			checkflags(const char *format, size_t index, t_flags *flags)
 	while (format[index] && (isflag(format[index]) == 0))
 	{
 		if (format[index] == '#')
-			flags->pound = true;
+			flags->pound = 2;
 		else if (format[index] == '+')
-			flags->plus = true;
+			flags->plus = 1;
+		else if (format[index] == 'L')
+			flags->L = true;
 		else if ((format[index] == '-') || format[index] == '.' || ft_isdigit(format[index]))
 			index = check_plusminus(index, format, flags);
 		else if (format[index] == 'l' && format[index + 1] != 'l')

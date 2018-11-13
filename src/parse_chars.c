@@ -6,11 +6,10 @@ size_t      justify_chars(t_buffer *buffer, t_flags *flags, int size)
 
     ret = 0;
 
-    if (flags->zero == true)
-        ft_printf("flags-zero");
-    if (flags->min_len > size && (flags->zero == true))
+    if (flags->min_len > size && (flags->zero == true) &&
+        (flags->minus == false))
         ret += ft_savechar(buffer, '0', flags->min_len - size);
-    else if (flags->min_len > size && (flags->zero == false))
+    else if (flags->min_len > size)
         ret += ft_savechar(buffer, ' ', flags->min_len - size);
     return (ret);
 }
