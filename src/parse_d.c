@@ -8,11 +8,11 @@ size_t      parse_d(t_buffer *buffer, t_flags *flags)
 
     str = ft_itoa_base(flags->inbuf->s, 10);
 	size = (int)ft_strlen(str) + flags->plus;
-    ret = !(flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
+    ret = !(flags->minus) ? (justify_chars(buffer, flags, size, 'd')) : 0;
 	if (flags->inbuf->s > 0 && flags->plus)
 		ret += ft_savechar(buffer, '+', 1);
 	ft_savestr(buffer, str, (int)ft_strlen(str));
-    ret += (flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
+    ret += (flags->minus) ? (justify_chars(buffer, flags, size, 'd')) : 0;
 	flags->inbuf->s = 0;
 	return (ret);
 }

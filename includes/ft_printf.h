@@ -19,6 +19,8 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdint.h>
+# include <wchar.h>
+# include <locale.h>
 # include "../libft/libft.h"
 
 typedef struct				s_buffer
@@ -72,8 +74,9 @@ int			ft_savestr(t_buffer *buffer, char *s, int size);
 
 char		*uitoa_base(unsigned long long nbr, int base);
 char		*ft_ftoa(float f, int size);
+size_t		get_wchar(t_buffer *buffer, wchar_t wc);
 
-size_t      justify_chars(t_buffer *buffer, t_flags *flags, int size);
+size_t      justify_chars(t_buffer *buffer, t_flags *flags, int size, char type);
 int			ischar(char c);
 int			isflag(char c);
 

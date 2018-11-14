@@ -1,29 +1,52 @@
 #include <stdio.h>
 #include <limits.h>
+#include <wchar.h>
+#include <locale.h>
 
 int     ft_printf(const char *format, ...);
 
 int     main(void)
 {
     char    *str;
+    wchar_t warray[2] = {0x1f984, 0};
+    int     ret;
 
+    ret = 0;
+    setlocale(LC_ALL, "");
     str = "Hello World!";
-    ft_printf("str: %20s %s c: %c-end-\n", "hello world!", " string2", 'c');
-    ft_printf("str: %-20s %s c: %c-end-\n", "hello world!", " string2", 'c');
+    ret = ft_printf("str: %20s %s c: %c-end-\n", "hello world!", " string2", 'c');
+    printf("ret: %d\n", ret);
+    ret = printf("ref: %20s %s c: %c-end-\n", "hello world!", " string2", 'c');
+    printf("ret: %d\n", ret);
+    ret = ft_printf("str: %-20s %s c: %c-end-\n", "hello world!", " string2", 'c');
+    printf("ret: %d\n", ret);
+    ret = printf("ref: %-20s %s c: %c-end-\n", "hello world!", " string2", 'c');
+    printf("ret: %d\n", ret);
 
-    ft_printf("str: %020.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
-    ft_printf("str: %-20.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
-    printf("str: %20.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
+    ret = ft_printf("str: %020.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
+    printf("ret: %d\n", ret);
+    ret = ft_printf("str: %-20.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
+    printf("ret: %d\n", ret);
 
-    ft_printf("mine: %llX-end-\n", (unsigned long long)str);
-    ft_printf("mine: %llX-end-\n", (unsigned long long)str);
-    ft_printf("mine: %-9d-end-\n", 19999);
-    printf("ref:: %-9d-end-\n", 19999);
+    ret = ft_printf("mine: %llX-end-\n", (unsigned long long)str);
+    printf("ret: %d\n", ret);
+    ret = ft_printf("mine: %llX-end-\n", (unsigned long long)str);
+    printf("ret: %d\n", ret);
+    ret = ft_printf("mine: %-9d-end-\n", 19999);
+    printf("ret: %d\n", ret);
+    ret = ft_printf("mine: %-20p-end-\n", str);
+    printf("ret: %d\n", ret);
+    ret = ft_printf("mine: %+-20d-end-\n", INT_MAX);
+    printf("ret: %d\n", ret);
 
-    ft_printf("mine: %-20p-end-\n", str);
-    printf("ref:: %-20p-end-\n", str);
-
-    ft_printf("mine: %+-20d-end-\n", INT_MAX);
-    printf("ref:: %+-20d-end-\n", INT_MAX);
+    ret = ft_printf("mine: %ls\n", warray);
+    printf("ret: %d\n", ret);
+    ret = printf("ref:: %ls\n", warray);
+    printf("ret: %d\n", ret);
+    wchar_t single = 0x1f984;
+    ret = ft_printf("mine: %C\n", single);
+    printf("ret: %d\n", ret);
+    ret = ft_printf("ref:: %lc\n", single);
+    printf("ret: %d\n", ret);
     return (0);
 }
