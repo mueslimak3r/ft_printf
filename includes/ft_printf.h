@@ -48,6 +48,7 @@ typedef struct				s_flags
 	bool					z;
 	int						pound;
 	int						plus;
+	int						space;
 	bool					minus;
 	bool					zero;
 	bool					limit_size;
@@ -73,7 +74,7 @@ int			ft_savechar(t_buffer *buffer, char s, int repeat);
 int			ft_savestr(t_buffer *buffer, char *s, int size);
 
 char		*uitoa_base(unsigned long long nbr, int base);
-char		*ft_ftoa(float f, int size);
+char		*ft_ftoa(t_flags *flags, int size);
 size_t		get_wchar(t_buffer *buffer, wchar_t wc);
 
 size_t      justify_chars(t_buffer *buffer, t_flags *flags, int size, char type);

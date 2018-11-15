@@ -11,6 +11,7 @@ void			initflags(t_flags *flags)
 	flags->z = false;
 	flags->pound = 0;
 	flags->plus = 0;
+	flags->space = 0;
 	flags->minus = false;
 	flags->min_len = false;
 	flags->limit_size = false;
@@ -62,6 +63,8 @@ size_t			checkflags(const char *format, size_t index, t_flags *flags)
 	{
 		if (format[index] == '#')
 			flags->pound = 2;
+		else if (format[index] == ' ')
+			flags->space = 1;
 		else if (format[index] == '+')
 			flags->plus = 1;
 		else if (format[index] == 'L')

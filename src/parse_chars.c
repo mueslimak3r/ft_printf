@@ -55,7 +55,7 @@ size_t      parse_wchar(va_list list, t_buffer *buffer, t_flags *flags, char typ
     int     i;
 
     i = 0;
-    if (type == 'C' || (type == 'c' && flags->longint == true))
+    if (type == 'c' && flags->longint == true)
     {
         single[0] = (wchar_t)va_arg(list, wint_t);
         single[1] = 0;

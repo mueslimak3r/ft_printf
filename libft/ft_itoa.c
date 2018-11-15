@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_itoa(int nbr)
+char	*ft_itoa(intmax_t nbr)
 {
 	int		length;
 	int		sign;
@@ -24,8 +24,6 @@ char	*ft_itoa(int nbr)
 		length++;
 	sign = nbr < 0 ? 1 : 0;
 	length = (nbr < 0) ? (length + 1) : (length);
-	if (nbr == -2147483648)
-		return (str = ft_strdup("-2147483648"));
 	str = ft_strnew(length);
 	if (!str)
 		return (NULL);

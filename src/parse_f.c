@@ -1,53 +1,45 @@
 #include "ft_printf.h"
 
-int                                fround(double x)
+char            *ft_ftoa(t_flags *flags, int size)
 {
-        if (x < 0)
-                return (int)(x - 0.5);
-        else
-                return (int)(x + 0.5);
-}
+	long double nb;
+	int		integer;
+	long	fraction;
+	char    *str;
+	char	*str2;
+	char	*ret;
 
-char                                *ft_ftoa(float f, int size)
-{
-        int integer = (int)f;
-        float flt = f - (float)integer;
-        char *buff = ft_itoa(integer);
-        char *newbuff = 0;
-        int length = 0;
-        newbuff = ft_expandwrite(buff, ft_strlen(buff), newbuff, &length);
-        free(buff);
-        if (size > 0)
-        {
-                newbuff = ft_expandwrite(".", 1, newbuff, &length);
-                while (size--)
-                        flt *= (10);
-                buff = ft_itoa(fround((double)flt));
-                newbuff = ft_expandwrite(buff, ft_strlen(buff) + 1, newbuff, &length);
-        }
-        return (newbuff);
-}
-
-size_t          parse_f(t_buffer *buffer, t_flags *flags)
-{
-    size_t      ret;
-    char        *str;
-    t_inbuf     buf;
-
-    ret = 0;
-
-    str = ft_ftoa();
-    return (ret);
+	integer = (int)flags->inbuf->f;
+	str = ft_itoa(integer);
+	nb = (flags->inbuf->f) - (long double)integer;
+	while (size-- > 0)
+		nb *= 10;
+	fraction = (long)nb;
+	str2 = ft_itoa(fraction);
+	ret = ft_strnew(ft_strlen(str) + ft_strlen(str2) + 2);
+	ret = ft_strcpy(ret, str);
+	ret[ft_strlen(str)] = '.';
+	ret = ft_strcat(ret, str2);
+	free(str);
+	free(str2);
+	return (ret);
 }
 
 size_t          route_f(va_list list, t_buffer *buffer, t_flags *flags)
 {
     t_inbuf     buf;
+    char        *str;
+	int			size;
+	int			ret;
 
-    if (flags->L == true)
-        buf.f = va_arg(list, long double);
+	size = (flags->limit_size == true) ? flags->max_size : 6;
+	if (flags->L == true)
+		buf.f = va_arg(list, long double);
 	else
 		buf.f = (long double)va_arg(list, double);
 	flags->inbuf = &buf;
-    return (parse_f(buffer, flags));
+    str = ft_ftoa(flags, size);
+	ret = ft_savestr(buffer, str, -1);
+	free(str);
+	return (ft_strlen(str));
 }

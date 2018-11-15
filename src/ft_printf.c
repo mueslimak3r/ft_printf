@@ -21,12 +21,12 @@ size_t		parse(va_list list, char type, t_buffer *buffer, t_flags *flags)
 		return (0);
 	if (type == '%')
 		ret = ft_savechar(buffer, '%', 1);
-	else if (type == 's' || type == 'c')
+	else if (type == 's' || type == 'c' || type == 'S')
 		ret = route_chars(list, type, buffer, flags);
-	else if (type == 'd' || type == 'i')
+	else if (type == 'd' || type == 'i' )
 		ret = route_d(list, buffer, flags);
-	//else if (type == 'f')
-	//	ret = route_f(list, buffer, flags);
+	else if (type == 'f')
+		ret = route_f(list, buffer, flags);
 	else
 		ret = route_u(list, type, buffer, flags);
 	return (ret);
