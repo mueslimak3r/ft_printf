@@ -48,10 +48,12 @@ int     main(void)
     ft_printf("ret: %d\n", ret);
     ret = printf("ref:: %lc\n", single);
     ft_printf("ret: %d\n", ret);
+
     double db = 3.9;
     ret = ft_printf("mine: %f\n", db);
     ft_printf("ret: %d\n", ret);
     ret = printf("ref:: %lf\n", db);
     ft_printf("ret: %d\n", ret);
+
     return (0);
 }
