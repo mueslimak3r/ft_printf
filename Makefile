@@ -13,8 +13,7 @@
 NAME = libftprintf.a
 
 SRC = ft_printf.c parse.c uitoa_base.c print_buffer.c \
-parse_u.c flags.c parse_chars.c parse_d.c parse_wchar.c \
-parse_f.c
+parse_u.c flags.c parse_chars.c parse_d.c parse_wchar.c
 
 OBJ = $(SRC:.c=.o)
 

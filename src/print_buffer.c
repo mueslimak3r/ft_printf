@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_buffer.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/04 22:32:05 by calamber          #+#    #+#             */
+/*   Updated: 2018/12/04 22:35:18 by calamber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	initbuffer(t_buffer *buffer)
@@ -10,24 +22,27 @@ void	initbuffer(t_buffer *buffer)
 
 int		checkbuffer(t_buffer *buffer, int size)
 {
-	if  ((buffer->buf_usedchars + size) <= buffer->buf_charsize)
+	if ((buffer->buf_usedchars + size) <= buffer->buf_charsize)
 		return (buffer->buf_usedchars);
-    else if (((buffer->buf_usedchars + size) > buffer->buf_charsize) && size > buffer->buf_charsize)
-    {
-    	write(1, buffer->chr, buffer->buf_usedchars);
+	else if (((buffer->buf_usedchars + size) >
+				buffer->buf_charsize) && size > buffer->buf_charsize)
+	{
+		write(1, buffer->chr, buffer->buf_usedchars);
 		free(buffer->chr);
 		if (size > buffer->buf_charsize)
 		{
 			buffer->chr = ft_strnew(sizeof(char) * size);
 			buffer->buf_charsize = size;
 		}
-    	else
+		else
 			buffer->chr = ft_strnew(sizeof(char) * buffer->buf_charsize);
-    }
-	else if ((buffer->buf_usedchars + size > buffer->buf_charsize) && size <= buffer->buf_charsize)
+	}
+	else if ((buffer->buf_usedchars + size >
+				buffer->buf_charsize) && size <= buffer->buf_charsize)
 	{
 		write(1, buffer->chr, buffer->buf_usedchars);
-		buffer->chr = (char*)ft_memset(buffer->chr, '\0', buffer->buf_usedchars);
+		buffer->chr =
+			(char*)ft_memset(buffer->chr, '\0', buffer->buf_usedchars);
 	}
 	buffer->buf_usedchars = 0;
 	return (0);
