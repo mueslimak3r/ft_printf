@@ -17,9 +17,12 @@ size_t		justify_chars(t_buffer *b, t_flags *f, int size, char t)
 	size_t	ret;
 
 	ret = 0;
+	if (f->min_len > size && f->max_size )
+		ret += ft_savechar(b, ' ', (f->min_len - size));
+
 	if (f->min_len > size && (f->minus == false)
 		&& (f->zero == true) && (t == 'd' || t == 'i'))
-		ret += ft_savechar(b, '0', (f->min_len - size));
+		ret += (f->max_size > f->min_len) ? ft_savechar(b, '0', (f->max_size - size)) : ft_savechar(b, '0', (f->min_len - size));
 	else if (f->min_len > size)
 		ret += ft_savechar(b, ' ', (f->min_len - size));
 	return (ret);
