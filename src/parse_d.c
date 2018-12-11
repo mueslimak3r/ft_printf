@@ -18,11 +18,15 @@ size_t			parse_d(t_buffer *buffer, t_flags *flags)
 	char		*str;
 	int			ret;
 
+	ret = 0;
 	str = ft_itoa_base(flags->inbuf->s, 10);
-	size = (int)ft_strlen(str) + flags->plus;
-	ret = !(flags->minus) ? (justify_chars(buffer, flags, size, 'd')) : 0;
-	if (flags->inbuf->s > 0 && flags->plus)
+	size = (int)ft_strlen(str);
+	if (flags->inbuf->s > 0 && flags->plus && flags->inbuf->s > 0)
+	{
 		ret += ft_savechar(buffer, '+', 1);
+		size += 1;
+	}
+	ret = !(flags->minus) ? (justify_chars(buffer, flags, size, 'd')) : 0;
 	ft_savestr(buffer, str, (int)ft_strlen(str));
 	ret += (flags->minus) ? (justify_chars(buffer, flags, size, 'd')) : 0;
 	flags->inbuf->s = 0;

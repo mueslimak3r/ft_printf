@@ -7,7 +7,7 @@ int     ft_printf(const char *format, ...);
 
 int     main(void)
 {
-    char    *str;
+    /*char    *str;
     wchar_t warray[2] = {0x1f984, 0};
     int     ret;
 
@@ -48,12 +48,14 @@ int     main(void)
     ft_printf("ret: %d\n", ret);
     ret = printf("ref:: %lc\n", single);
     ft_printf("ret: %d\n", ret);
-/*
+
     double db = 3.9;
     ret = ft_printf("mine: %f\n", db);
     ft_printf("ret: %d\n", ret);
     ret = printf("ref:: %lf\n", db);
     ft_printf("ret: %d\n", ret);
 */
+    ft_printf("%4.5d\n", 42);
+    printf("%4.5d\n", 42);
     return (0);
 }
