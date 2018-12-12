@@ -12,6 +12,20 @@
 
 #include "ft_printf.h"
 
+size_t			justify_d(t_buffer *b, t_flags *f, int size)
+{
+	size_t		ret;
+
+	ret = 0;
+	if (f->min_len > size && f->max_size > f->min_len)
+		ret += ft_savechar(b, ' ', (f->max_size - f->min_len - size));
+	if (f->min_len > size && (f->minus == false) && (f->zero == true))
+		ret += (f->max_size > f->min_len) ? ft_savechar(b, '0', (f->max_size - size)) : ft_savechar(b, '0', (f->min_len - size));
+	else if (f->min_len > size)
+		ret += ft_savechar(b, ' ', (f->min_len - size));
+	return (ret);
+}
+
 size_t			parse_d(t_buffer *buffer, t_flags *flags)
 {
 	int			size;
@@ -26,9 +40,9 @@ size_t			parse_d(t_buffer *buffer, t_flags *flags)
 		ret += ft_savechar(buffer, '+', 1);
 		size += 1;
 	}
-	ret = !(flags->minus) ? (justify_chars(buffer, flags, size, 'd')) : 0;
+	ret = !(flags->minus) ? (justify_d(buffer, flags, size)) : 0;
 	ft_savestr(buffer, str, (int)ft_strlen(str));
-	ret += (flags->minus) ? (justify_chars(buffer, flags, size, 'd')) : 0;
+	ret += (flags->minus) ? (justify_d(buffer, flags, size)) : 0;
 	flags->inbuf->s = 0;
 	return (ret);
 }

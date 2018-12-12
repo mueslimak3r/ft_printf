@@ -12,18 +12,12 @@
 
 #include "ft_printf.h"
 
-size_t		justify_chars(t_buffer *b, t_flags *f, int size, char t)
+size_t		justify_chars(t_buffer *b, t_flags *f, int size)
 {
 	size_t	ret;
 
 	ret = 0;
-	if (f->min_len > size && f->max_size )
-		ret += ft_savechar(b, ' ', (f->min_len - size));
-
-	if (f->min_len > size && (f->minus == false)
-		&& (f->zero == true) && (t == 'd' || t == 'i'))
-		ret += (f->max_size > f->min_len) ? ft_savechar(b, '0', (f->max_size - size)) : ft_savechar(b, '0', (f->min_len - size));
-	else if (f->min_len > size)
+	if (f->min_len > size)
 		ret += ft_savechar(b, ' ', (f->min_len - size));
 	return (ret);
 }
@@ -41,10 +35,10 @@ size_t		parse_chars(char *data, char type, t_buffer *buffer, t_flags *flags)
 	}
 	else
 		size = 1;
-	ret += !(flags->minus) ? (justify_chars(buffer, flags, size, type)) : 0;
+	ret += !(flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
 	ret += (type == 's') ? ft_savestr(buffer, data, size) :
 		(ft_savechar(buffer, *data, 1));
-	ret += (flags->minus) ? (justify_chars(buffer, flags, size, type)) : 0;
+	ret += (flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
 	return (ret);
 }
 
