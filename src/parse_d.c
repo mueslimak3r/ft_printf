@@ -21,7 +21,7 @@ size_t			justify_d(t_buffer *b, t_flags *f, int size)
 		ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
 	if (f->min_len > size && (f->minus == false) && (f->max_size > 0 || f->zero == true))
 		ret += (f->max_size > f->min_len) ? ft_savechar(b, '0', (f->max_size - size) + f->space) :
-			ft_savechar(b, '0', (f->max_size - size));
+			ft_savechar(b, '0', (f->min_len - size));
 	else if (f->min_len > size)
 		ret += ft_savechar(b, ' ', (f->min_len - size));
 	return (ret);
@@ -36,7 +36,7 @@ size_t			parse_d(t_buffer *buffer, t_flags *flags)
 	ret = 0;
 	str = ft_itoa_base(flags->inbuf->s, 10);
 	size = (int)ft_strlen(str);
-	if (flags->inbuf->s > 0 && flags->plus && flags->inbuf->s > 0)
+	if (flags->inbuf->s > 0 && flags->plus)
 	{
 		ret += ft_savechar(buffer, '+', 1);
 		size += 1;

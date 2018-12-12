@@ -60,5 +60,8 @@ int     main(void)
 
     ft_printf("|%5d|\n", 42);
     printf("|%5d|\n", 42);
+
+    ft_printf("|%+04d|\n", 42);
+    printf("|%+04d|\n", 42);
     return (0);
 }
