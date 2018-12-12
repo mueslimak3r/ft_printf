@@ -55,8 +55,8 @@ int     main(void)
     ret = printf("ref:: %lf\n", db);
     ft_printf("ret: %d\n", ret);
 */
-    ft_printf("|%-5d|\n", 42);
-    printf("|%-5d|\n", 42);
+    ft_printf("|% 4.5i|\n", 42);
+    printf("|% 4.5i|\n", 42);
 
     ft_printf("|%5d|\n", 42);
     printf("|%5d|\n", 42);
