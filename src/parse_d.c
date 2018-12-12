@@ -40,7 +40,7 @@ size_t			parse_d(t_buffer *buffer, t_flags *flags)
 		ret += ft_savechar(buffer, '+', 1);
 		size += 1;
 	}
-	if (flags->space && flags->inbuf->s > 0)
+	else if (flags->space && (size += 1))
 		ret += ft_savechar(buffer, ' ', 1);
 	ret = !(flags->minus) ? (justify_d(buffer, flags, size)) : 0;
 	ft_savestr(buffer, str, (int)ft_strlen(str));
