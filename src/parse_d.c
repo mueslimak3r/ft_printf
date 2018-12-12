@@ -19,7 +19,7 @@ size_t			justify_d(t_buffer *b, t_flags *f, int size)
 	ret = 0;
 	if (f->min_len > size && f->min_len > f->max_size && f->max_size > 0)
 		ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
-	if (f->min_len > size && (f->minus == false) && f->max_size > 0)
+	if (f->min_len > size && (f->minus == false) && (f->max_size > 0 || f->zero == true)
 		ret += (f->max_size > f->min_len) ? ft_savechar(b, '0', (f->max_size - size) + f->space) :
 			ft_savechar(b, '0', (f->max_size - size));
 	else if (f->min_len > size)
