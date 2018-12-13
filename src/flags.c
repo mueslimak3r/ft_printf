@@ -27,7 +27,7 @@ void			initflags(t_flags *flags)
 	flags->minus = false;
 	flags->min_len = false;
 	flags->limit_size = false;
-	flags->max_size = 0;
+	flags->max_size = -1;
 	flags->inbuf = NULL;
 }
 
