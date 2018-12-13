@@ -22,6 +22,7 @@ void			initflags(t_flags *flags)
 	flags->j = false;
 	flags->z = false;
 	flags->pound = 0;
+	flags->zero = false;
 	flags->plus = 0;
 	flags->space = 0;
 	flags->minus = false;
