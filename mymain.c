@@ -67,6 +67,11 @@ int     main(void)
     ft_printf("|% 4.5i|\n", 42);
     printf("|% 4.5i|\n", 42);
 
+    ft_printf("|% 4.2i|\n", 42);
+    printf("|% 4.2i|\n", 42);
+
+    ft_printf("|% 4.3i|\n", 42);
+    printf("|% 4.3i|\n", 42);
 
     ft_printf("|% 4.5i|\n", 42);
     printf("|% 4.5i|\n", 42);
