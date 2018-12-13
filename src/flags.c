@@ -22,10 +22,11 @@ void			initflags(t_flags *flags)
 	flags->j = false;
 	flags->z = false;
 	flags->pound = 0;
+	flags->zero = false;
 	flags->plus = 0;
 	flags->space = 0;
 	flags->minus = false;
-	flags->min_len = false;
+	flags->min_len = -1;
 	flags->limit_size = false;
 	flags->max_size = -1;
 	flags->inbuf = NULL;
@@ -35,7 +36,7 @@ size_t			check_size(int index, const char *format, t_flags *flags)
 {
 	while ((format[index] >= '0') && (format[index] <= '9'))
 	{
-		flags->limit_size = true;
+		flags->max_size = (flags->max_size > -1) ? flags->max_size : 0;
 		flags->max_size *= 10;
 		flags->max_size += (format[index] - '0');
 		index++;
@@ -59,6 +60,7 @@ size_t			check_plusminus(size_t i, const char *f, t_flags *fl)
 	}
 	while ((f[i] >= '0') && (f[i] <= '9'))
 	{
+		fl->min_len = (fl->min_len > -1) ? fl->min_len : 0;
 		fl->min_len *= 10;
 		fl->min_len += (f[i] - '0');
 		i++;
