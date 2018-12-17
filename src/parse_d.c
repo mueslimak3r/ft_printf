@@ -17,6 +17,7 @@ size_t			justify_d(t_buffer *b, t_flags *f, int size)
 	size_t		ret;
 
 	ret = 0;
+	printf("precision: %d\n", f->max_size);
 	if (f->min_len > size && f->min_len > f->max_size && f->max_size > 0 && f->minus == false)
 		ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
 	if (f->max_size > size && (f->max_size > -1) && f->zero == false)
@@ -44,9 +45,9 @@ size_t			parse_d(t_buffer *buffer, t_flags *flags)
 	}
 	else if (flags->space && flags->inbuf->s > 0 && (size += 1))
 		ret += ft_savechar(buffer, ' ', 1);
-	ret = !(flags->minus) ? (justify_d(buffer, flags, size)) : 0;
+	ret += justify_d(buffer, flags, size, 0);
 	ft_savestr(buffer, str, (int)ft_strlen(str));
-	ret += (flags->minus) ? ((flags->minus == false) && justify_d(buffer, flags, size)) : 0;
+	ret += justify_d(buffer, flags, size, 1);
 	flags->inbuf->s = 0;
 	return (ret);
 }

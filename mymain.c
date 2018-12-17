@@ -79,12 +79,16 @@ int     main(void)
 
     ft_printf("|%-5.3d|\n", 42);
     printf("|%-5.3d|\n", 42);
+
     ft_printf("|% 4.5i|\n", 42);
     printf("|% 4.5i|\n", 42);
+
     ft_printf("|%04.5i|\n", 42);
     printf("|%04.5i|\n", 42);
+
     ft_printf("|%04.3i|\n", 42);
     printf("|%04.3i|\n", 42);
+
     ft_printf("|%04.2i|\n", 42);
     printf("|%04.2i|\n", 42);
     return (0);
