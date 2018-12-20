@@ -75,7 +75,7 @@ size_t		route_chars(va_list l, char t, t_buffer *b, t_flags *f)
 
 	if (f->longint || t == 'S' || t == 'C')
 		return (parse_wchar(l, b, f, t));
-	if (t == 's')
+	else if (t == 's')
 	{
 		str = va_arg(l, char*);
 		return (parse_chars(str, t, b, f));
