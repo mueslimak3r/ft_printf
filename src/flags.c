@@ -91,6 +91,5 @@ size_t			checkflags(const char *format, size_t index, t_flags *flags)
 		if (!(isflag(format[index])))
 			index++;
 	}
-	printf("precision: %d\n", flags->max_size);
 	return (index);
 }

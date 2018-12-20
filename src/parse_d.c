@@ -12,20 +12,29 @@
 
 #include "ft_printf.h"
 
-size_t			justify_d(t_buffer *b, t_flags *f, int size)
+size_t			justify_d(t_buffer *b, t_flags *f, int size, int pos)
 {
 	size_t		ret;
 
 	ret = 0;
-	printf("precision: %d\n", f->max_size);
-	if (f->min_len > size && f->min_len > f->max_size && f->max_size > 0 && f->minus == false)
-		ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
-	if (f->max_size > size && (f->max_size > -1) && f->zero == false)
-		ret += ft_savechar(b, '0', (f->max_size - size + f->space));
-	else if (f->zero == true)
-		ret += (f->max_size > size) ? ft_savechar(b, '0', (f->max_size - size)) : ft_savechar(b, '0', (f->min_len - size));
-	else if (f->min_len > size && !(f->min_len > f->max_size && f->max_size > 0) && f->minus == false)
-		ret += ft_savechar(b, ' ', (f->min_len - size));
+	if (pos == 0)
+	{
+		if (f->min_len > size && f->min_len > f->max_size && f->max_size > 0 && f->minus == false)
+			ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
+		if ((f->zero == false) && (f->max_size > size) && (f->max_size > -1))
+			ret += ft_savechar(b, '0', (f->max_size - size + f->space));
+		else if (f->zero == true && f->max_size > -1 && f->max_size > size)
+			ret += (f->max_size > size) ? ft_savechar(b, '0', (f->max_size - size)) : ft_savechar(b, '0', (f->min_len - size));
+		else if (f->min_len > size && !(f->min_len > f->max_size && f->max_size > 0) && f->minus == false)
+			ret += ft_savechar(b, ' ', (f->min_len - size));
+	}
+	else
+	{
+		if (f->min_len > size && f->min_len > f->max_size && f->max_size > 0 && f->minus == true)
+			ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
+		else if (f->min_len > size && !(f->min_len > f->max_size && f->max_size > 0) && f->minus == true)
+			ret += ft_savechar(b, ' ', (f->min_len - size));
+	}
 	return (ret);
 }
 
