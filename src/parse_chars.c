@@ -46,23 +46,24 @@ size_t		parse_wchar(va_list l, t_buffer *b, t_flags *f, char t)
 {
 	int		size;
 	wchar_t	*array;
-	wchar_t	single[2];
+	wchar_t	single;
 	int		i;
 
 	i = 0;
+	size = 0;
 	if (t == 'c' && f->longint == true)
 	{
-		single[0] = (wchar_t)va_arg(l, wint_t);
-		single[1] = 0;
-		array = single;
+		single = (wchar_t)va_arg(l, wint_t);
+		get_wchar(b, single);
+		size = ft_sizewchar(single);
 	}
 	else
-		array = va_arg(l, wchar_t*);
-	size = 0;
-	while (array[i])
-	{
-		get_wchar(b, array[i]);
-		size += ft_sizewchar(array[i++]);
+	{	array = va_arg(l, wchar_t*);
+		while (array[i])
+		{
+			get_wchar(b, array[i]);
+			size += ft_sizewchar(array[i++]);
+		}
 	}
 	return (size);
 }
