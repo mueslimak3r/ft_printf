@@ -54,6 +54,7 @@ size_t			parse_d(t_buffer *buffer, t_flags *flags)
 	{
 		ret += ft_savechar(buffer, '+', 1);
 		size += 1;
+		
 	}
 	ret += justify_d(buffer, flags, size, 0);
 	ft_savestr(buffer, str, (int)ft_strlen(str));
