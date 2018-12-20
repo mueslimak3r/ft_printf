@@ -53,6 +53,7 @@ size_t			parse_d(t_buffer *buffer, t_flags *flags)
 	if (flags->inbuf->s > 0 && flags->plus)
 	{
 		ret += ft_savechar(buffer, '+', 1);
+		size += 1;
 	}
 	//printf("space: %d size: %d width: %d precision: %d\n", flags->space, size, flags->min_len, flags->max_size);
 	ret += justify_d(buffer, flags, size, 0);
