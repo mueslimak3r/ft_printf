@@ -101,7 +101,7 @@ int     main(void)
     ft_printf("|%05d|\n", 42);
     printf("|%05d|\n", 42);
 
-    ft_printf("|%0d|\n", 42);
-    printf("|%0d|\n", 42);   
+    ft_printf("|% 4d|\n", 42);
+    printf("|% 4d|\n", 42);   
     return (0);
 }
