@@ -30,7 +30,7 @@ size_t		parse_chars(char *data, char type, t_buffer *buffer, t_flags *flags)
 	ret = 0;
 	if (type == 's')
 	{
-		size = (flags->limit_size && flags->max_size < (int)ft_strlen(data))
+		size = (flags->max_size > -1 && flags->max_size < (int)ft_strlen(data))
 			? flags->max_size : (int)ft_strlen(data);
 	}
 	else
