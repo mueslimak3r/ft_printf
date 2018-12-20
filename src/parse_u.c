@@ -28,7 +28,7 @@ size_t			usenbr(t_flags *flags, t_buffer *buffer, char type, int base)
 	str = (ft_isupper(type)) ? ft_strcase(str, 'a') : str;
 	size += (type == 'p' || ((type == 'x' ||
 					type == 'X') && flags->pound)) ? 2 : 0;
-	ret	+= (type == 'o' || type == 'O') ? ft_savechar(buffer, '0', 1) : 0;
+	ret	+= ((type == 'o' || type == 'O') && flags->pound) ? ft_savechar(buffer, '0', 1) : 0;
 	ret += !(flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
 	ret += ft_savestr(buffer, str, -1);
 	ret += (flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
