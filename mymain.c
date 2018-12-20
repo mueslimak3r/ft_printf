@@ -93,6 +93,12 @@ int     main(void)
     printf("|%04.2i|\n", 42);
 
     ft_printf("|%-5.3s|\n", "LYDI");
-    printf("|%-5.3s|\n", "LYDI");  
+    printf("|%-5.3s|\n", "LYDI");
+
+    ft_printf("|%04d|\n", 42);
+    printf("|%04d|\n", 42);
+
+    ft_printf("|%0d|\n", 42);
+    printf("|%0d|\n", 42);   
     return (0);
 }
