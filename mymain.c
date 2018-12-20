@@ -83,20 +83,20 @@ int     main(void)
     ft_printf("|% 4.5i|\n", 42);
     printf("|% 4.5i|\n", 42);
 
-    ft_printf("|%04.5i|\n", 42);
-    printf("|%04.5i|\n", 42);
+    ft_printf("|% 06.4i|\n", 42);
+    printf("|% 06.4i|\n", 42);
 
     ft_printf("|%04.3i|\n", 42);
     printf("|%04.3i|\n", 42);
 
-    ft_printf("|%04.2i|\n", 42);
-    printf("|%04.2i|\n", 42);
+    ft_printf("|% 04.2i|\n", 42);
+    printf("|% 04.2i|\n", 42);
 
     ft_printf("|%-5.3s|\n", "LYDI");
     printf("|%-5.3s|\n", "LYDI");
 
-    ft_printf("|%04d|\n", 42);
-    printf("|%04d|\n", 42);
+    ft_printf("|% 4d|\n", 42);
+    printf("|% 4d|\n", 42);
 
     ft_printf("|%0d|\n", 42);
     printf("|%0d|\n", 42);   
