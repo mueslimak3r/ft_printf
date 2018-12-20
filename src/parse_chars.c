@@ -60,7 +60,10 @@ size_t		parse_wchar(va_list l, t_buffer *b, t_flags *f, char t)
 		array = va_arg(l, wchar_t*);
 	size = 0;
 	while (array[i])
-		size += get_wchar(b, array[i++]);
+	{
+		get_wchar(b, array[i]);
+		size += ft_sizewchar(array[i++]);
+	}
 	return (size);
 }
 
