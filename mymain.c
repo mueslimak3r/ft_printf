@@ -105,6 +105,9 @@ int     main(void)
     printf("|% 4d|\n", 42);   
 
     ft_printf("|%+04d|\n", 42);
-    printf("|%+04d|\n", 42);    
+    printf("|%+04d|\n", 42);   
+    
+    ft_printf("|%+04.15x|\n", 42);
+    printf("|%+04.15x|\n", 42);  
     return (0);
 }
