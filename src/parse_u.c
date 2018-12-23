@@ -28,9 +28,9 @@ size_t			usenbr(t_flags *flags, t_buffer *buffer, char type, int base)
 	size += (type == 'p' || ((type == 'x' ||
 					type == 'X') && flags->pound)) ? 2 : 0;
 	ret	+= ((type == 'o' || type == 'O') && flags->pound && (flags->inbuf->u != 0)) ? ft_savechar(buffer, '0', 1) : 0;
-	ret += !(flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
+	ret += justify_d(buffer, flags, size, 0);
 	ret += ft_savestr(buffer, str, -1);
-	ret += (flags->minus) ? (justify_chars(buffer, flags, size)) : 0;
+	ret += justify_d(buffer, flags, size, 1);
 	free(str);
 	return (ret);
 }
