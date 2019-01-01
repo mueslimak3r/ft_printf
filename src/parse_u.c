@@ -21,14 +21,14 @@ size_t			usenbr(t_flags *flags, t_buffer *buffer, char type, int base)
 	ret = 0;
 	str = uitoa_base(flags->inbuf->u, base);
 	size = (int)ft_strlen(str);
+	size += (type == 'p' || ((type == 'x' || type == 'X') && flags->pound)) ? 2 : 0;
+	size += ((type == 'o' || type == 'O') && flags->pound && (flags->inbuf->u != 0)) ? 1 : 0;
+	ret += justify_d(buffer, flags, size, 0);
 	if (type == 'p' || ((type == 'x' || type == 'X') && flags->pound))
 		ret += (ft_isupper(type)) ? ft_savestr(buffer, "0X", -1)
 			: ft_savestr(buffer, "0x", -1);
 	str = (ft_isupper(type)) ? ft_strcase(str, 'a') : str;
-	size += (type == 'p' || ((type == 'x' ||
-					type == 'X') && flags->pound)) ? 2 : 0;
-	ret	+= ((type == 'o' || type == 'O') && flags->pound && (flags->inbuf->u != 0)) ? ft_savechar(buffer, '0', 1) : 0;
-	ret += justify_d(buffer, flags, size, 0);
+	ret += ((type == 'o' || type == 'O') && flags->pound && (flags->inbuf->u != 0)) ? ft_savechar(buffer, '0', 1) : 0;
 	ret += ft_savestr(buffer, str, -1);
 	ret += justify_d(buffer, flags, size, 1);
 	free(str);
@@ -66,8 +66,7 @@ size_t			route_u(va_list l, char t, t_buffer *b, t_flags *f)
 	else if (f->z == true)
 		buf.u = (unsigned long long)va_arg(l, size_t);
 	else
-		buf.u = (unsigned long)va_arg(l, unsigned long);
+		buf.u = (unsigned long long)va_arg(l, unsigned int);
 	f->inbuf = &buf;
 	return (parse_u(t, b, f));
-	return (0);
 }

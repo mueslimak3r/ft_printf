@@ -75,7 +75,6 @@ int     main(void)
 
     ft_printf("|% 4.5i|\n", 42);
     printf("|% 4.5i|\n", 42);
-*/
 
     ft_printf("|%-5.3d|\n", 42);
     printf("|%-5.3d|\n", 42);
@@ -108,6 +107,11 @@ int     main(void)
     printf("|%+04d|\n", 42);   
     
     ft_printf("|%+04.15x|\n", 42);
-    printf("|%+04.15x|\n", 42);  
+    printf("|%+04.15x|\n", 42);
+*/
+    char* str = "hello";
+
+    ft_printf("%#20o!\n", &str);
+    printf("%#20o!\n", &str);
     return (0);
 }
