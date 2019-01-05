@@ -12,30 +12,42 @@
 
 #include "ft_printf.h"
 
-size_t			justify_d(t_buffer *b, t_flags *f, int size, int pos)
+size_t			justify2(t_buffer *b, t_flags *f, char t, int s)
 {
 	size_t		ret;
 
 	ret = 0;
-	if (pos == 0)
+	if ((f->zero == false) && f->max_size > s)
+		ret += (f->max_size > -1) ? ft_savechar(b, '0', (f->max_size - s)) : ft_savechar(b, '0', (f->min_len - s));
+	else if (f->zero == true && ((f->max_size > -1 && f->max_size > s) || (f->min_len > s && f->max_size == -1)))
+		ret += (f->max_size > -1 && f->max_size > s) ? ft_savechar(b, '0', (f->max_size - s)) : ft_savechar(b, '0', (f->min_len - s));
+	if (t == 'p' || ((t == 'x' || t == 'X') && f->pound))
+		ret += (ft_isupper(t)) ? ft_savestr(b, "0X", -1)
+			: ft_savestr(b, "0x", -1);
+	return (ret);
+}
+
+size_t			justify_d(t_buffer *b, t_flags *f, char t, int s, int p)
+{
+	size_t		ret;
+
+	ret = 0;
+	if (p == 0)
 	{
-		if (f->min_len > size && f->min_len > f->max_size && f->max_size > 0 && f->minus == false)
+		if (f->min_len > s && f->min_len > f->max_size && f->max_size > 0 && f->minus == false)
 			ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
-		else if (f->min_len > size && f->minus == false && (!((f->max_size > -1) || (f->zero))))
-			ret += ft_savechar(b, ' ', (f->min_len - size));
-		if (f->space && !(f->min_len > size && f->max_size < f->min_len))
+		else if (f->min_len > s && f->minus == false && (!((f->max_size > -1) || (f->zero))))
+			ret += ft_savechar(b, ' ', (f->min_len - s));
+		if (f->space && !(f->min_len > s && f->max_size < f->min_len))
 			ret += ft_savechar(b, ' ', 1);
-		if ((f->zero == false) && f->max_size > size)
-			ret += (f->max_size > -1) ? ft_savechar(b, '0', (f->max_size - size)) : ft_savechar(b, '0', (f->min_len - size));
-		else if (f->zero == true && ((f->max_size > -1 && f->max_size > size) || (f->min_len > size && f->max_size == -1)))
-			ret += (f->max_size > -1 && f->max_size > size) ? ft_savechar(b, '0', (f->max_size - size)) : ft_savechar(b, '0', (f->min_len - size));
+		ret += justify2(b, f, t, s);
 	}
-	else if (pos == 1)
+	else if (p == 1)
 	{
-		if (f->min_len > size && f->min_len > f->max_size && f->max_size > 0 && f->minus == true)
+		if (f->min_len > s && f->min_len > f->max_size && f->max_size > 0 && f->minus == true)
 			ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
-		else if (f->min_len > size && !(f->min_len > f->max_size && f->max_size > 0) && f->minus == true)
-			ret += ft_savechar(b, ' ', (f->min_len - size));
+		else if (f->min_len > s && !(f->min_len > f->max_size && f->max_size > 0) && f->minus == true)
+			ret += ft_savechar(b, ' ', (f->min_len - s));
 	}
 	return (ret);
 }
@@ -55,9 +67,9 @@ size_t			parse_d(t_buffer *buffer, t_flags *flags)
 		ret += ft_savechar(buffer, '+', 1);
 		size += 1;
 	}
-	ret += justify_d(buffer, flags, size, 0);
-	ft_savestr(buffer, str, (int)ft_strlen(str));
-	ret += justify_d(buffer, flags, size, 1);
+	ret += justify_d(buffer, flags, size, 'd', 0);
+	ret += ft_savestr(buffer, str, (int)ft_strlen(str));
+	ret += justify_d(buffer, flags, size, 'd', 1);
 	flags->inbuf->s = 0;
 	return (ret);
 }

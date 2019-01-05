@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+
+
 size_t			usenbr(t_flags *flags, t_buffer *buffer, char type, int base)
 {
 	size_t		ret;
@@ -21,16 +23,14 @@ size_t			usenbr(t_flags *flags, t_buffer *buffer, char type, int base)
 	ret = 0;
 	str = uitoa_base(flags->inbuf->u, base);
 	size = (int)ft_strlen(str);
-	size += (type == 'p' || ((type == 'x' || type == 'X') && flags->pound)) ? 2 : 0;
+	size += ((type == 'p' || type == 'x' || type == 'X') && flags->pound) ? 2 : 0;
 	size += ((type == 'o' || type == 'O') && flags->pound && (flags->inbuf->u != 0)) ? 1 : 0;
-	ret += justify_d(buffer, flags, size, 0);
-	if (type == 'p' || ((type == 'x' || type == 'X') && flags->pound))
-		ret += (ft_isupper(type)) ? ft_savestr(buffer, "0X", -1)
-			: ft_savestr(buffer, "0x", -1);
+	printf("size: %d w: %d p: %d\n", size, flags->min_len, flags->max_size);
+	ret += justify_d(buffer, flags, size, type, 0);
 	str = (ft_isupper(type)) ? ft_strcase(str, 'a') : str;
 	ret += ((type == 'o' || type == 'O') && flags->pound && (flags->inbuf->u != 0)) ? ft_savechar(buffer, '0', 1) : 0;
 	ret += ft_savestr(buffer, str, -1);
-	ret += justify_d(buffer, flags, size, 1);
+	ret += justify_d(buffer, flags, size, type, 1);
 	free(str);
 	return (ret);
 }

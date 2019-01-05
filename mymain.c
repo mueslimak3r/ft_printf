@@ -108,10 +108,12 @@ int     main(void)
     
     ft_printf("|%+04.15x|\n", 42);
     printf("|%+04.15x|\n", 42);
-*/
+
     char* str = "hello";
 
     ft_printf("%#20o!\n", &str);
     printf("%#20o!\n", &str);
+*/
+    ft_printf("%5.2x", 5427);
     return (0);
 }

@@ -31,7 +31,7 @@ char	*uitoa_base(unsigned long long nbr, int base);
 size_t	get_wchar(t_buffer *buffer, wchar_t wc);
 size_t  ft_sizewchar(wchar_t wc);
 size_t	justify_chars(t_buffer *b, t_flags *f, int size);
-size_t  justify_d(t_buffer *b, t_flags *f, int size, int pos);
+size_t  justify_d(t_buffer *b, t_flags *f, char t, int s, int p);
 int		ischar(char c);
 int		isflag(char c);
 
