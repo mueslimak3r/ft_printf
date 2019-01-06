@@ -47,17 +47,11 @@ size_t			check_size(int index, const char *format, t_flags *flags)
 size_t			check_plusminus(size_t i, const char *f, t_flags *fl)
 {
 	if (f[i] == '-')
-	{
 		fl->minus = true;
-		i++;
-	}
-	if (f[i] == '.')
+	else if (f[i] == '.')
 		i = check_size(++i, f, fl);
 	else if (f[i] == '0' && !(ft_isdigit(f[i - 1])))
-	{
 		fl->zero = true;
-		i++;
-	}
 	while ((f[i] >= '0') && (f[i] <= '9'))
 	{
 		fl->min_len = (fl->min_len > -1) ? fl->min_len : 0;

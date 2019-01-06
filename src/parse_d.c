@@ -17,13 +17,13 @@ size_t			justify2(t_buffer *b, t_flags *f, char t, int s)
 	size_t		ret;
 
 	ret = 0;
-	if ((f->zero == false) && f->max_size > s)
-		ret += (f->max_size > -1) ? ft_savechar(b, '0', (f->max_size - s)) : ft_savechar(b, '0', (f->min_len - s));
-	else if (f->zero == true && ((f->max_size > -1 && f->max_size > s) || (f->min_len > s && f->max_size == -1)))
-		ret += (f->max_size > -1 && f->max_size > s) ? ft_savechar(b, '0', (f->max_size - s)) : ft_savechar(b, '0', (f->min_len - s));
 	if (t == 'p' || ((t == 'x' || t == 'X') && f->pound))
 		ret += (ft_isupper(t)) ? ft_savestr(b, "0X", -1)
 			: ft_savestr(b, "0x", -1);
+	if ((f->zero == false) && f->max_size > s)
+		ret += (f->max_size > -1) ? ft_savechar(b, '0', (f->max_size - s)) : ft_savechar(b, '0', (f->min_len - s));
+	else if (f->zero == true && (f->max_size > s || (f->min_len > s && !f->minus)))
+		ret += (f->max_size > -1 && f->max_size > s) ? ft_savechar(b, '0', (f->max_size - s)) : ft_savechar(b, '0', (f->min_len - s));
 	return (ret);
 }
 
@@ -34,9 +34,9 @@ size_t			justify_d(t_buffer *b, t_flags *f, char t, int s, int p)
 	ret = 0;
 	if (p == 0)
 	{
-		if (f->min_len > s && f->min_len > f->max_size && f->max_size > 0 && f->minus == false)
+		if (f->min_len > s && f->min_len > f->max_size && f->max_size > s && f->minus == false)
 			ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
-		else if (f->min_len > s && f->minus == false && (!((f->max_size > -1) || (f->zero))))
+		else if (f->min_len > s && f->minus == false && (!((f->max_size > s) || (f->zero))))
 			ret += ft_savechar(b, ' ', (f->min_len - s));
 		if (f->space && !(f->min_len > s && f->max_size < f->min_len))
 			ret += ft_savechar(b, ' ', 1);
@@ -67,9 +67,9 @@ size_t			parse_d(t_buffer *buffer, t_flags *flags)
 		ret += ft_savechar(buffer, '+', 1);
 		size += 1;
 	}
-	ret += justify_d(buffer, flags, size, 'd', 0);
+	ret += justify_d(buffer, flags, 'd', size, 0);
 	ret += ft_savestr(buffer, str, (int)ft_strlen(str));
-	ret += justify_d(buffer, flags, size, 'd', 1);
+	ret += justify_d(buffer, flags, 'd', size, 1);
 	flags->inbuf->s = 0;
 	return (ret);
 }

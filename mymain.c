@@ -114,6 +114,6 @@ int     main(void)
     ft_printf("%#20o!\n", &str);
     printf("%#20o!\n", &str);
 */
-    ft_printf("%5.2x", 5427);
+    ft_printf("%-#6o", 2500);
     return (0);
 }
