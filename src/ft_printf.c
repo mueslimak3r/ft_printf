@@ -12,6 +12,30 @@
 
 #include "ft_printf.h"
 
+size_t			justify_percent(va_list l, t_buffer *b, t_flags *f, int p)
+{
+	size_t		ret;
+
+	ret = 0;
+	if (p == 0)
+	{
+		if (f->min_len > 1 && f->min_len > f->max_size && f->max_size > 1 && f->minus == false)
+			ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
+		else if (f->min_len > 1 && f->minus == false && (!((f->max_size > 1) || (f->zero))))
+			ret += ft_savechar(b, ' ', (f->min_len - 1));
+		if (f->space && !(f->min_len > 1 && f->max_size < f->min_len))
+			ret += ft_savechar(b, ' ', 1);
+	}
+	else if (p == 1)
+	{
+		if (f->min_len > 1 && f->min_len > f->max_size && f->max_size > 0 && f->minus == true)
+			ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
+		else if (f->min_len > 1 && !(f->min_len > f->max_size && f->max_size > 0) && f->minus == true)
+			ret += ft_savechar(b, ' ', (f->min_len - 1));
+	}
+	return (ret);
+}
+
 size_t			parse(va_list l, char t, t_buffer *b, t_flags *f)
 {
 	size_t		ret;
@@ -20,7 +44,11 @@ size_t			parse(va_list l, char t, t_buffer *b, t_flags *f)
 	if (!f)
 		return (0);
 	if (t == '%')
-		ret = ft_savechar(b, '%', 1);
+	{
+		ret += justify_percent(l, b, f, 0);
+		ret += ft_savechar(b, '%', 1);
+		ret += justify_percent(l, b, f, 1);
+	}
 	else if (t == 's' || t == 'c' || t == 'S')
 		ret = route_chars(l, t, b, f);
 	else if (t == 'd' || t == 'i')

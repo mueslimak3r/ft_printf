@@ -60,7 +60,7 @@ size_t			parse_d(t_buffer *buffer, t_flags *flags)
 
 	ret = 0;
 	str = ft_itoa_base(flags->inbuf->s, 10);
-	flags->space = (flags->space == 1 && flags->inbuf->s > 0) ? 1 : 0;
+	flags->space = (flags->space && !flags->plus && flags->inbuf->s > 0) ? 1 : 0;
 	size = (int)ft_strlen(str);
 	if (flags->inbuf->s > 0 && flags->plus)
 	{
