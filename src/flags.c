@@ -27,13 +27,14 @@ void			initflags(t_flags *flags)
 	flags->space = 0;
 	flags->minus = false;
 	flags->min_len = -1;
-	flags->limit_size = false;
+	flags->l_size = 0;
 	flags->max_size = -1;
 	flags->inbuf = NULL;
 }
 
 size_t			check_size(int index, const char *format, t_flags *flags)
 {
+	flags->l_size = 1;
 	while ((format[index] >= '0') && (format[index] <= '9'))
 	{
 		flags->max_size = (flags->max_size > -1) ? flags->max_size : 0;
@@ -77,6 +78,8 @@ size_t			checkflags(const char *format, size_t index, t_flags *flags)
 			flags->plus = 1;
 		else if (format[index] == 'L')
 			flags->largel = true;
+		else if (format[index] == 'j')
+			flags->j = true;
 		else if ((format[index] == '-') ||
 				format[index] == '.' || ft_isdigit(format[index]))
 			index = check_plusminus(index, format, flags);

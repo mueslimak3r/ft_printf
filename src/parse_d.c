@@ -38,7 +38,7 @@ size_t			justify_d(t_buffer *b, t_flags *f, char t, int s, int p)
 			ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
 		else if (f->min_len > s && f->minus == false && (!((f->max_size > s) || (f->zero))))
 			ret += ft_savechar(b, ' ', (f->min_len - s));
-		if (f->space && !(f->min_len > s && f->max_size < f->min_len))
+		if (f->space && !(f->min_len > s && f->max_size < f->min_len) && (t == 'd' || t == 'i'))
 			ret += ft_savechar(b, ' ', 1);
 		ret += justify2(b, f, t, s);
 	}
@@ -52,25 +52,25 @@ size_t			justify_d(t_buffer *b, t_flags *f, char t, int s, int p)
 	return (ret);
 }
 
-size_t			parse_d(t_buffer *buffer, t_flags *flags)
+size_t			parse_d(t_buffer *b, t_flags *f)
 {
 	int			size;
 	char		*str;
 	int			ret;
 
 	ret = 0;
-	str = ft_itoa_base(flags->inbuf->s, 10);
-	flags->space = (flags->space && !flags->plus && flags->inbuf->s > 0) ? 1 : 0;
+	str = ft_itoa_base(f->inbuf->s, 10);
+	f->space = (f->space && !f->plus && f->inbuf->s > 0) ? 1 : 0;
 	size = (int)ft_strlen(str);
-	if (flags->inbuf->s > 0 && flags->plus)
+	if (f->inbuf->s > 0 && f->plus)
 	{
-		ret += ft_savechar(buffer, '+', 1);
+		ret += ft_savechar(b, '+', 1);
 		size += 1;
 	}
-	ret += justify_d(buffer, flags, 'd', size, 0);
-	ret += ft_savestr(buffer, str, (int)ft_strlen(str));
-	ret += justify_d(buffer, flags, 'd', size, 1);
-	flags->inbuf->s = 0;
+	ret += justify_d(b, f, 'd', size, 0);
+	ret += (f->max_size == 0 || (f->l_size && f->max_size == -1)) ? 0 : ft_savestr(b, str, (int)ft_strlen(str));
+	ret += justify_d(b, f, 'd', size, 1);
+	f->inbuf->s = 0;
 	return (ret);
 }
 

@@ -51,7 +51,7 @@ typedef struct				s_flags
 	int						space;
 	bool					minus;
 	bool					zero;
-	bool					limit_size;
+	int						l_size;
 	int						max_size;
 	int						min_len;
 	t_inbuf					*inbuf;

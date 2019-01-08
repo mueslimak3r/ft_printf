@@ -23,8 +23,6 @@ size_t			justify_percent(va_list l, t_buffer *b, t_flags *f, int p)
 			ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
 		else if (f->min_len > 1 && f->minus == false && (!((f->max_size > 1) || (f->zero))))
 			ret += ft_savechar(b, ' ', (f->min_len - 1));
-		if (f->space && !(f->min_len > 1 && f->max_size < f->min_len))
-			ret += ft_savechar(b, ' ', 1);
 	}
 	else if (p == 1)
 	{
