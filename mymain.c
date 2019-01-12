@@ -113,8 +113,26 @@ int     main(void)
 
     ft_printf("%#20o!\n", &str);
     printf("%#20o!\n", &str);
-*/
-    ft_printf("@moulitest: %5.x %5.0x", 0, 0);
+
+    ft_printf("@moulitest: a%5.xb a%5.0xb-\n", 0, 0);
+    printf("@moulitest: a%5.xb a%5.0xb-\n", 0, 0);
+    ft_printf("@moulitest: a%5.xb a%5.0xb-\n", 42, 42);
+    printf("@moulitest: a%5.xb a%5.0xb-\n", 42, 42);
+    ft_printf("data: %c", 0);
+
+    ft_printf("data:%+10.4d-\n", 56);
+    printf("data:%+10.4d-\n", 56);
+    ft_printf("data:%10.4d-\n", 56);
+    printf("data:%10.4d-\n", 56);
+
+    ft_printf("data:%-10.4d-\n", 56);
+    printf("data:%-10.4d-\n", 56);
+
+    ft_printf("%-6o-\n", 2500);
+    printf("%-6o-\n", 2500);
     //ft_printf("%-#6o", 2500);
+*/
+    ft_printf("@moulitest: -%10.9d-\n", -42);
+    ft_printf("@moulitest: -%10.9d-\n", -42);
     return (0);
 }

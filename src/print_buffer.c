@@ -53,8 +53,6 @@ int		ft_savechar(t_buffer *buffer, char s, int repeat)
 	int		pos;
 	int		ret;
 
-	if (!s)
-		return (0);
 	if (repeat == 0)
 		return (0);
 	pos = checkbuffer(buffer, repeat);

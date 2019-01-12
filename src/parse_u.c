@@ -29,7 +29,7 @@ size_t			usenbr(t_flags *f, t_buffer *buffer, char t, int base)
 	ret += justify_d(buffer, f, t, size, 0);
 	str = (ft_isupper(t)) ? ft_strcase(str, 'a') : str;
 	ret += ((t == 'o' || t == 'O') && f->pound && (f->inbuf->u != 0)) ? ft_savechar(buffer, '0', 1) : 0;
-	ret += (f->max_size == 0 || (f->l_size && f->max_size == -1)) ? 0 : ft_savestr(buffer, str, -1);
+	ret += ((f->max_size == 0) || (f->l_size && f->max_size == -1)) ? 0 : ft_savestr(buffer, str, -1);
 	ret += justify_d(buffer, f, t, size, 1);
 	free(str);
 	return (ret);

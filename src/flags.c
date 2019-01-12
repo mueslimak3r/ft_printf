@@ -30,14 +30,15 @@ void			initflags(t_flags *flags)
 	flags->l_size = 0;
 	flags->max_size = -1;
 	flags->inbuf = NULL;
+	flags->isneg = 0;
 }
 
 size_t			check_size(int index, const char *format, t_flags *flags)
 {
 	flags->l_size = 1;
+	flags->max_size = 0;
 	while ((format[index] >= '0') && (format[index] <= '9'))
 	{
-		flags->max_size = (flags->max_size > -1) ? flags->max_size : 0;
 		flags->max_size *= 10;
 		flags->max_size += (format[index] - '0');
 		index++;

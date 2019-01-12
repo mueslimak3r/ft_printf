@@ -25,8 +25,7 @@ INC = -I includes
 
 CC = gcc
 
-FLAGS =
-# -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -49,7 +48,7 @@ fclean: clean
 re: fclean all
 
 compile: re
-	@$(CC) $(FLAGS) $(INC) mymain.c $(NAME)
+	@$(CC) $(FLAGS) -g -fsanitize=address $(INC) mymain.c $(NAME)
 	@make clean
 
 cleanup: fclean

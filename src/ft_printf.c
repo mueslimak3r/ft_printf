@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-size_t			justify_percent(va_list l, t_buffer *b, t_flags *f, int p)
+size_t			justify_percent(t_buffer *b, t_flags *f, int p)
 {
 	size_t		ret;
 
@@ -43,9 +43,9 @@ size_t			parse(va_list l, char t, t_buffer *b, t_flags *f)
 		return (0);
 	if (t == '%')
 	{
-		ret += justify_percent(l, b, f, 0);
+		ret += justify_percent(b, f, 0);
 		ret += ft_savechar(b, '%', 1);
-		ret += justify_percent(l, b, f, 1);
+		ret += justify_percent(b, f, 1);
 	}
 	else if (t == 's' || t == 'c' || t == 'S')
 		ret = route_chars(l, t, b, f);

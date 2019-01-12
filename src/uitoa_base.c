@@ -36,7 +36,7 @@ char					*uitoa_base(unsigned long long nbr, int base)
 
 	hex = "0123456789abcdef";
 	size = u_numsize(nbr, base);
-	res = (char*)malloc(sizeof(char) * (size));
+	res = (char*)ft_memalloc(sizeof(char) * (size));
 	index = size - 1;
 	while (nbr >= (unsigned long long)base)
 	{
