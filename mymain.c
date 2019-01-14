@@ -7,53 +7,38 @@ int     ft_printf(const char *format, ...);
 
 int     main(void)
 {
-    /*char    *str;
+/*
+    char    *str;
     wchar_t warray[2] = {0x1f984, 0};
     int     ret;
 
     ret = 0;
     setlocale(LC_ALL, "");
     str = "Hello World!";
-    ret = ft_printf("str: %20s %s c: %c-end-\n", "hello world!", " string2", 'c');
-    ft_printf("ret: %d\n", ret);
-    ret = printf("ref: %20s %s c: %c-end-\n", "hello world!", " string2", 'c');
-    ft_printf("ret: %d\n", ret);
-    ret = ft_printf("str: %-20s %s c: %c-end-\n", "hello world!", " string2", 'c');
-    ft_printf("ret: %d\n", ret);
-    ret = printf("ref: %-20s %s c: %c-end-\n", "hello world!", " string2", 'c');
-    ft_printf("ret: %d\n", ret);
-
     ret = ft_printf("str: %020.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
     ft_printf("ret: %d\n", ret);
-    ret = ft_printf("str: %-20.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
+
+    ret = printf("ref: %-20.7s %s c: %c-end-\n", "hello world!", " string2", 'c');
     ft_printf("ret: %d\n", ret);
 
-    ret = ft_printf("mine: %llX-end-\n", (unsigned long long)str);
+    ret = ft_printf("str: %-20p-end-\n", INT_MAX);
     ft_printf("ret: %d\n", ret);
-    ret = ft_printf("mine: %llX-end-\n", (unsigned long long)str);
-    ft_printf("ret: %d\n", ret);
-    ret = ft_printf("mine: %-9d-end-\n", 19999);
-    ft_printf("ret: %d\n", ret);
-    ret = ft_printf("mine: %-20p-end-\n", str);
-    ft_printf("ret: %d\n", ret);
-    ret = ft_printf("mine: %+-20d-end-\n", INT_MAX);
+    ret = printf("ref: %+-20d-end-\n", INT_MAX);
     ft_printf("ret: %d\n", ret);
 
     ret = ft_printf("mine: %ls\n", warray);
     ft_printf("ret: %d\n", ret);
     ret = printf("ref:: %ls\n", warray);
     ft_printf("ret: %d\n", ret);
-    wchar_t single = 0x1f984;
-    ret = ft_printf("mine: %lc\n", single);
-    ft_printf("ret: %d\n", ret);
-    ret = printf("ref:: %lc\n", single);
-    ft_printf("ret: %d\n", ret);
+
 
     double db = 3.9;
     ret = ft_printf("mine: %f\n", db);
     ft_printf("ret: %d\n", ret);
     ret = printf("ref:: %lf\n", db);
     ft_printf("ret: %d\n", ret);
+
+    printf ("part 2\n");
 
     ft_printf("|% 3d|\n", 42);
     printf("|% 3d|\n", 42);
@@ -106,13 +91,8 @@ int     main(void)
     ft_printf("|%+04d|\n", 42);
     printf("|%+04d|\n", 42);   
     
-    ft_printf("|%+04.15x|\n", 42);
-    printf("|%+04.15x|\n", 42);
-
-    char* str = "hello";
-
-    ft_printf("%#20o!\n", &str);
-    printf("%#20o!\n", &str);
+    ft_printf("|%+04.15d|\n", 42);
+    printf("|%+04.15d|\n", 42);
 
     ft_printf("@moulitest: a%5.xb a%5.0xb-\n", 0, 0);
     printf("@moulitest: a%5.xb a%5.0xb-\n", 0, 0);
@@ -132,7 +112,49 @@ int     main(void)
     printf("%-6o-\n", 2500);
     //ft_printf("%-#6o", 2500);
 */
-    ft_printf("@moulitest: -%10.9d-\n", -42);
-    ft_printf("@moulitest: -%10.9d-\n", -42);
+
+    ft_printf("@moulitest: -%-10.9d-\n", -42);
+    printf("@moulitest: -%-10.9d-\n", -42);
+
+    //long long ii = -9223372036854775808;
+
+    char w = 'w';
+    ft_printf("%ld\n", LONG_MAX);
+    printf("%ld\n", LONG_MAX);
+    ft_printf("%zd\n", 4294967295);
+    printf("%zd\n", 4294967295);
+
+    ft_printf("%hhd\n", w);
+    printf("%hhd\n", w);
+
+    ft_printf("@moulitest: [%.o] [%.0o]--\n", 42, 43);
+    printf("@moulitest: [%.o] [%.0o]--\n", 42, 43);
+
+    ft_printf("@moulitest: [%5.o] [%5.0o]--\n", 0, 0);
+    printf("@moulitest: [%5.o] [%5.0o]--\n", 0, 0);
+
+    ft_printf("%-5.10o-\n", 2500);
+    printf("%-5.10o-\n", 2500);
+
+    ft_printf("%+10.5d-\n", 4242);
+    printf("%+10.5d-\n", 4242);
+
+    ft_printf("%0+5d--\n", 42);
+    printf("%0+5d--\n", 42);
+
+    ft_printf("@moulitest: %.10d-\n", -42);
+    printf("@moulitest: %.10d-\n", -42);
+
+    ft_printf("@moulitest: %#.o %#.0o-\n", 0, 0);
+    printf("@moulitest: %#.o %#.0o-\n", 0, 0);
+
+    ft_printf("@moulitest: %.o %.0o-\n", 0, 0);
+    printf("@moulitest: %.o %.0o-\n", 0, 0);
+
+    ft_printf("{%+03d}-\n", 1);
+    printf("{%+03d}-\n", 1);
+
+    ft_printf("{%+03d}\n", 0);
+    printf("{%+03d}\n", 0);
     return (0);
 }

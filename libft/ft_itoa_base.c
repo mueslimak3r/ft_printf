@@ -30,7 +30,7 @@ char						*ft_itoa_base(long long value, int base)
 	int					mul;
 	char				*alpha;
 
-	alpha = "0123456789abcdefghijklmnopqrstuvwxyz";
+	alpha = "0123456789abcdef";
 	buffsize = 0;
 	cpy = value;
 	mul = 0;

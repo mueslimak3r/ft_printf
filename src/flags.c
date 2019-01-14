@@ -54,12 +54,16 @@ size_t			check_plusminus(size_t i, const char *f, t_flags *fl)
 		i = check_size(++i, f, fl);
 	else if (f[i] == '0' && !(ft_isdigit(f[i - 1])))
 		fl->zero = true;
-	while ((f[i] >= '0') && (f[i] <= '9'))
+	if ((f[i] >= '0') && (f[i] <= '9'))
 	{
-		fl->min_len = (fl->min_len > -1) ? fl->min_len : 0;
-		fl->min_len *= 10;
-		fl->min_len += (f[i] - '0');
-		i++;
+		while ((f[i] >= '0') && (f[i] <= '9'))
+		{
+			fl->min_len = (fl->min_len > -1) ? fl->min_len : 0;
+			fl->min_len *= 10;
+			fl->min_len += (f[i] - '0');
+			i++;
+		}
+		i--;
 	}
 	if (f[i] == '.')
 		i = check_size(++i, f, fl);
@@ -81,6 +85,12 @@ size_t			checkflags(const char *format, size_t index, t_flags *flags)
 			flags->largel = true;
 		else if (format[index] == 'j')
 			flags->j = true;
+		else if (format[index] == 'z')
+			flags->z = true;
+		else if (format[index] == 'h' && format[index + 1] != 'h')
+			flags->shrt = true;
+		else if (format[index] == 'h' && format[index + 1] == 'h')
+			flags->chr = true;
 		else if ((format[index] == '-') ||
 				format[index] == '.' || ft_isdigit(format[index]))
 			index = check_plusminus(index, format, flags);

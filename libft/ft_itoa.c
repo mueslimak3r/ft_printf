@@ -14,9 +14,9 @@
 
 char	*ft_itoa(long long nbr)
 {
-	int		length;
-	int		sign;
-	char	*str;
+	int			length;
+	long long	sign;
+	char		*str;
 
 	sign = nbr;
 	length = 1;
