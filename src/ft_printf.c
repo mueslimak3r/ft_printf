@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 11:24:06 by calamber          #+#    #+#             */
-/*   Updated: 2018/11/30 16:24:17 by calamber         ###   ########.fr       */
+/*   Updated: 2019/01/13 23:31:36 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,20 @@ size_t			justify_percent(t_buffer *b, t_flags *f, int p)
 	ret = 0;
 	if (p == 0)
 	{
-		if (f->min_len > 1 && f->min_len > f->max_size && f->max_size > 1 && f->minus == false)
+		if (f->min_len > 1 && f->min_len > f->max_size
+				&& f->max_size > 1 && f->minus == false)
 			ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
-		else if (f->min_len > 1 && f->minus == false && (!((f->max_size > 1) || (f->zero))))
+		else if (f->min_len > 1 && f->minus == false
+				&& (!((f->max_size > 1) || (f->zero))))
 			ret += ft_savechar(b, ' ', (f->min_len - 1));
 	}
 	else if (p == 1)
 	{
-		if (f->min_len > 1 && f->min_len > f->max_size && f->max_size > 0 && f->minus == true)
+		if (f->min_len > 1 && f->min_len > f->max_size
+				&& f->max_size > 0 && f->minus == true)
 			ret += ft_savechar(b, ' ', (f->min_len - f->max_size));
-		else if (f->min_len > 1 && !(f->min_len > f->max_size && f->max_size > 0) && f->minus == true)
+		else if (f->min_len > 1 && !(f->min_len > f->max_size
+					&& f->max_size > 0) && f->minus == true)
 			ret += ft_savechar(b, ' ', (f->min_len - 1));
 	}
 	return (ret);

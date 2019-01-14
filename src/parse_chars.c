@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 16:24:26 by calamber          #+#    #+#             */
-/*   Updated: 2018/12/04 23:05:22 by calamber         ###   ########.fr       */
+/*   Updated: 2019/01/13 23:29:41 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ size_t		parse_wchar(va_list l, t_buffer *b, t_flags *f, char t)
 		size = ft_sizewchar(single);
 	}
 	else
-	{	array = va_arg(l, wchar_t*);
+	{
+		array = va_arg(l, wchar_t*);
 		while (array[i])
 		{
 			get_wchar(b, array[i]);

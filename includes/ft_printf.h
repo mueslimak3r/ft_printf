@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 11:23:09 by calamber          #+#    #+#             */
-/*   Updated: 2018/12/04 22:52:40 by calamber         ###   ########.fr       */
+/*   Updated: 2019/01/13 23:03:31 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int		ft_savechar(t_buffer *buffer, char s, int repeat);
 int		ft_savestr(t_buffer *buffer, char *s, int size);
 char	*uitoa_base(unsigned long long nbr, int base);
 size_t	get_wchar(t_buffer *buffer, wchar_t wc);
-size_t  ft_sizewchar(wchar_t wc);
+size_t	ft_sizewchar(wchar_t wc);
 size_t	justify_chars(t_buffer *b, t_flags *f, int size);
-size_t  justify_d(t_buffer *b, t_flags *f, char t, int s, int p);
+size_t	justify_d(t_buffer *b, t_flags *f, int s, int p);
 int		ischar(char c);
 int		isflag(char c);
 

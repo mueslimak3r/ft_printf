@@ -55,6 +55,7 @@ typedef struct				s_flags
 	int						max_size;
 	int						min_len;
 	int						isneg;
+	char					t;
 	t_inbuf					*inbuf;
 }							t_flags;
 

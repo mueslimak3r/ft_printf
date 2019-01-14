@@ -6,13 +6,11 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:45:37 by calamber          #+#    #+#             */
-/*   Updated: 2018/11/30 16:00:36 by calamber         ###   ########.fr       */
+/*   Updated: 2019/01/13 23:29:05 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-
 
 size_t			usenbr(t_flags *f, t_buffer *buffer, char t, int base)
 {
@@ -24,14 +22,17 @@ size_t			usenbr(t_flags *f, t_buffer *buffer, char t, int base)
 	str = uitoa_base(f->inbuf->u, base);
 	size = (int)ft_strlen(str);
 	size = (f->max_size <= 0 && f->inbuf->u == 0) ? 0 : size;
-	f->pound = (f->pound && (((t == 'x' || t == 'X') && f->inbuf->u != 0) || (t == 'o' || t == 'O'))) ? f->pound : false; 
+	f->pound = (f->pound && (((t == 'x' || t == 'X') && f->inbuf->u != 0) ||
+				(t == 'o' || t == 'O'))) ? f->pound : false;
 	size += (t == 'p' || ((t == 'x' || t == 'X') && f->pound)) ? 2 : 0;
 	size += ((t == 'o' || t == 'O') && f->pound) ? 1 : 0;
-	ret += justify_d(buffer, f, t, size, 0);
+	ret += justify_d(buffer, f, size, 0);
 	str = (ft_isupper(t)) ? ft_strcase(str, 'a') : str;
-	ret += ((t == 'o' || t == 'O') && f->pound) ? ft_savechar(buffer, '0', 1) : 0;
-	ret += ((f->max_size == 0 || (f->l_size && f->max_size == -1)) && f->inbuf->u == 0) ? 0 : ft_savestr(buffer, str, -1);
-	ret += justify_d(buffer, f, t, size, 1);
+	ret += ((t == 'o' || t == 'O') && f->pound) ?
+		ft_savechar(buffer, '0', 1) : 0;
+	ret += ((f->max_size == 0 || (f->l_size && f->max_size == -1))
+			&& f->inbuf->u == 0) ? 0 : ft_savestr(buffer, str, -1);
+	ret += justify_d(buffer, f, size, 1);
 	free(str);
 	return (ret);
 }
@@ -69,5 +70,6 @@ size_t			route_u(va_list l, char t, t_buffer *b, t_flags *f)
 	else
 		buf.u = (unsigned long long)va_arg(l, unsigned int);
 	f->inbuf = &buf;
+	f->t = t;
 	return (parse_u(t, b, f));
 }

@@ -31,6 +31,7 @@ void			initflags(t_flags *flags)
 	flags->max_size = -1;
 	flags->inbuf = NULL;
 	flags->isneg = 0;
+	flags->t = 0;
 }
 
 size_t			check_size(int index, const char *format, t_flags *flags)
@@ -87,10 +88,6 @@ size_t			checkflags(const char *format, size_t index, t_flags *flags)
 			flags->j = true;
 		else if (format[index] == 'z')
 			flags->z = true;
-		else if (format[index] == 'h' && format[index + 1] != 'h')
-			flags->shrt = true;
-		else if (format[index] == 'h' && format[index + 1] == 'h')
-			flags->chr = true;
 		else if ((format[index] == '-') ||
 				format[index] == '.' || ft_isdigit(format[index]))
 			index = check_plusminus(index, format, flags);
